@@ -1,0 +1,2 @@
+WeasyPrint==0.19.2
+markdown2==2.1.0
