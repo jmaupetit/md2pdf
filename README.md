@@ -4,7 +4,7 @@ Markdown to PDF converter.
 
 ## Installation
 
-Clone this project first and install it with its dependancies by typing:
+Clone this project first and install it with its dependancies (ideally in a virtualenv, see the [virtualenvwrapper project documentation](http://virtualenvwrapper.readthedocs.org/en/latest/index.html)) by typing:
 
     $ python setup.py install
 
