@@ -33,7 +33,7 @@ def main(argv=None):
     # Paths
     md_file_path = arguments.get('INPUT.MD')
     pdf_file_path = arguments.get('OUTPUT.PDF')
-    css_file_path = arguments.get('STYLE.CSS', None)
+    css_file_path = arguments.get('--css', None)
 
     # Convert markdown to html
     raw_html = markdown_path(md_file_path)
