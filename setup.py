@@ -13,7 +13,7 @@ setup(
     name = "md2pdf",
     version = VERSION,
     packages = find_packages(),
-    scripts = ['md2pdf.py',],
+    scripts = ['md2pdf',],
     install_requires = open('requirements.txt').readlines(),
     author = "Julien Maupetit",
     author_email = "julien@maupetit.net",

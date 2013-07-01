@@ -23,11 +23,11 @@ In a few words, here are the few steps you will need to follow:
 
 Try to generate the project documentation with:
 
-    $ md2pdf.py README.md README.pdf
+    $ md2pdf README.md README.pdf
 
 Optionnaly, you may load an external style (restricted to CSS2):
 
-    $ md2pdf.py README.md README.pdf --css markdown-css-themes/markdown2.css
+    $ md2pdf README.md README.pdf --css markdown-css-themes/markdown2.css
 
 For testing purpose, I defined [markdown-css-themes](https://github.com/jasonm23/markdown-css-themes) as a  git submodule. If you want to test this css resource, type:
 
