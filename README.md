@@ -10,7 +10,7 @@ Clone this project first and install it with its dependancies by typing:
 
 ### Troubleshooting on MacOSX
 
-Ensure, Weasyprint is fully functionnal before using md2pdf. You will find installation instructions in the project documentation: [http://weasyprint.org/docs/install/#mac-os-x](http://weasyprint.org/docs/install/)
+Ensure, Weasyprint is fully functionnal before using md2pdf. You will find installation instructions in the project documentation: [http://weasyprint.org/docs/install/](http://weasyprint.org/docs/install/#mac-os-x)
 
 In a few words, here are the few steps you will need to follow:
 
