@@ -3,7 +3,7 @@
 
 """md2pdf - Markdown to PDF conversion tool.
 
-Usage: md2pdf.py [options] INPUT.MD OUTPUT.PDF
+Usage: md2pdf [options] INPUT.MD OUTPUT.PDF
 
 Options:
     --css=STYLE.CSS
@@ -12,12 +12,11 @@ Options:
 import sys
 
 from docopt import docopt
-from markdown2 import markdown_path
-from weasyprint import HTML, CSS
 
+from md2pdf.core import md2pdf
 
 __title__ = 'md2pdf'
-__version__ = '0.1.2'
+__version__ = '0.2'
 __author__ = 'Julien Maupetit'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2013 Julien Maupetit'
@@ -35,19 +34,7 @@ def main(argv=None):
     pdf_file_path = arguments.get('OUTPUT.PDF')
     css_file_path = arguments.get('--css', None)
 
-    # Convert markdown to html
-    raw_html = markdown_path(md_file_path)
-
-    # Weasyprint HTML object
-    html = HTML(string=raw_html)
-
-    # Get styles
-    css = []
-    if css_file_path:
-        css.append(CSS(filename=css_file_path))
-
-    # Generate PDF
-    html.write_pdf(pdf_file_path, stylesheets=css)
+    md2pdf(md_file_path, pdf_file_path, css_file_path)
 
     return 1
 

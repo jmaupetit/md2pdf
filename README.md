@@ -21,8 +21,10 @@ In a few words, here are the few steps you will need to follow:
 
 ## Usage
 
+### As a CLI
+
     Usage: 
-        md2pdf.py [options] INPUT.MD OUTPUT.PDF
+        md2pdf [options] INPUT.MD OUTPUT.PDF
 
     Options:
         --css=STYLE.CSS
@@ -39,6 +41,16 @@ For testing purpose, I defined [markdown-css-themes](https://github.com/jasonm23
 
     $ git submodule init
     $ git submodule update
+
+### As a library
+
+You can use md2pdf in your python code, like:
+
+    from md2pdf.core import md2pdf
+    
+    md2pdf(md_file_path, pdf_file_path, css_file_path=css_path)
+
+Quite simple.
 
 ## Misc
 
