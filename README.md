@@ -39,3 +39,13 @@ For testing purpose, I defined [markdown-css-themes](https://github.com/jasonm23
 
     $ git submodule init
     $ git submodule update
+
+## Misc
+
+### Using custom fonts in styles
+
+WeasyPrint does not support the `@font-face` property yet (see [project issue 28](https://github.com/Kozea/WeasyPrint/issues/28)). If you use want to use custom fonts, you should use system fonts and define them with the `font-family` CSS property, like:
+    
+    font-family: 'Neutraface Condensed';
+
+Note that you should only define **one single** custom font, not a substitution list.
