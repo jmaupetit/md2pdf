@@ -34,7 +34,8 @@ def main(argv=None):
     pdf_file_path = arguments.get('OUTPUT.PDF')
     css_file_path = arguments.get('--css', None)
 
-    md2pdf(md_file_path, pdf_file_path, css_file_path)
+    md2pdf(pdf_file_path, md_file_path=md_file_path,
+           css_file_path=css_file_path)
 
     return 1
 
