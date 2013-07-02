@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """
 md2pdf - Installation script
 """
 
+import md2pdf
+
 from setuptools import setup, find_packages
 
-VERSION = '0.2'
 
 setup(
     name = "md2pdf",
-    version = VERSION,
+    version = md2pdf.__version__,
     packages = find_packages(),
     scripts = ['scripts/md2pdf',],
     install_requires = open('requirements.txt').readlines(),

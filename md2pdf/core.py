@@ -1,15 +1,33 @@
 # -*- coding: utf-8 -*-
-from markdown2 import markdown_path
+from markdown2 import markdown, markdown_path
 from weasyprint import HTML, CSS
 
+from .exceptions import ValidationError
 
-def md2pdf(md_file_path, pdf_file_path, css_file_path=None):
+
+__title__ = 'md2pdf'
+__version__ = '0.2.1'
+__author__ = 'Julien Maupetit'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2013 Julien Maupetit'
+
+
+def md2pdf(pdf_file_path, md_content=None, md_file_path=None,
+           css_file_path=None):
     """
     Convert markdown file to pdf with styles
     """
 
     # Convert markdown to html
-    raw_html = markdown_path(md_file_path, extras=["cuddled-lists"])
+    raw_html = ""
+    extras = ["cuddled-lists"]
+    if md_file_path:
+        raw_html = markdown_path(md_file_path, extras=extras)
+    elif md_content:
+        raw_html = markdown(md_file_path, extras=extras)
+
+    if not len(raw_html):
+        raise ValidationError('Input markdown seems empty')
 
     # Weasyprint HTML object
     html = HTML(string=raw_html)
