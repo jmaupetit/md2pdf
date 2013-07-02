@@ -24,7 +24,7 @@ def md2pdf(pdf_file_path, md_content=None, md_file_path=None,
     if md_file_path:
         raw_html = markdown_path(md_file_path, extras=extras)
     elif md_content:
-        raw_html = markdown(md_file_path, extras=extras)
+        raw_html = markdown(md_content, extras=extras)
 
     if not len(raw_html):
         raise ValidationError('Input markdown seems empty')
