@@ -1,6 +1,6 @@
 # md2pdf
 
-Markdown to PDF converter.
+Convert Markdown files to PDF with styles.
 
 ## Installation
 
@@ -21,7 +21,13 @@ In a few words, here are the few steps you will need to follow:
 
 ## Usage
 
-Try to generate the project documentation with:
+    Usage: 
+        md2pdf.py [options] INPUT.MD OUTPUT.PDF
+
+    Options:
+        --css=STYLE.CSS
+
+For example, try to generate the project documentation with:
 
     $ md2pdf README.md README.pdf
 
