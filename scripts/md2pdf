@@ -13,7 +13,7 @@ import sys
 
 from docopt import docopt
 
-from md2pdf.core import md2pdf
+from md2pdf import md2pdf, __version__
 
 def main(argv=None):
 
