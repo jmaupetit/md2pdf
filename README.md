@@ -52,6 +52,18 @@ You can use md2pdf in your python code, like:
 
 Quite simple.
 
+### With Docker
+
+Install [Docker](https://www.docker.com/)
+
+Then build the image
+
+    $ docker build -t md2pdf .
+
+Now run your image:
+
+    $ docker run -i -t -v $PWD:/srv md2pdf INPUT.MD OUTPUT.PDF
+
 ## Misc
 
 ### Using custom fonts in styles
