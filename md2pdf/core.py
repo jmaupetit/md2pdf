@@ -6,7 +6,7 @@ from .exceptions import ValidationError
 
 
 __title__ = 'md2pdf'
-__version__ = '0.2.4'
+__version__ = '0.3'
 __author__ = 'Julien Maupetit'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2013 Julien Maupetit'
