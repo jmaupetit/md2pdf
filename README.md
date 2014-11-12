@@ -56,13 +56,13 @@ Quite simple.
 
 Install [Docker](https://www.docker.com/)
 
-Then build the image
+Pull the image
 
-    $ docker build -t md2pdf .
+    $ docker pull jmaupetit/md2pdf
 
 Now run your image:
 
-    $ docker run -i -t -v $PWD:/srv md2pdf INPUT.MD OUTPUT.PDF
+    $ docker run -i -t -v $PWD:/srv jmaupetit/md2pdf INPUT.MD OUTPUT.PDF
 
 ## Misc
 
