@@ -71,8 +71,16 @@ You can use md2pdf in your python code, like:
 ```python
 from md2pdf.core import md2pdf
 
-md2pdf(md_file_path, pdf_file_path, css_file_path=css_path)
+md2pdf(pdf_file_path,
+       md_content=None,
+       md_file_path=None,
+       css_file_path=None,
+       base_url=None)
 ```
+
+See the
+[md2pdf](https://github.com/jmaupetit/md2pdf/blob/master/md2pdf/core.py#L15)
+function's documentation for details.
 
 ### With Docker
 
@@ -87,7 +95,7 @@ $ docker pull jmaupetit/md2pdf
 Now run your image:
 
 ```bash
-$ docker run --rm -v $PWD:/srv jmaupetit/md2pdf INPUT.MD OUTPUT.PDF
+$ docker run --rm -v $PWD:/srv jmaupetit/md2pdf --css styles.css INPUT.MD OUTPUT.PDF
 ```
 
 ## Misc

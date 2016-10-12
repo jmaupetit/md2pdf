@@ -15,7 +15,20 @@ __copyright__ = 'Copyright 2013-2016 Julien Maupetit'
 def md2pdf(pdf_file_path, md_content=None, md_file_path=None,
            css_file_path=None, base_url=None):
     """
-    Convert markdown file to pdf with styles
+    Converts input markdown to styled HTML and renders it to a PDF file.
+
+    Args:
+        pdf_file_path: output PDF file path.
+        md_content: input markdown raw string content.
+        md_file_path: input markdown file path.
+        css_file_path: input styles path (CSS).
+        base_url: absolute base path for markdown linked content (as images).
+
+    Returns:
+        None
+
+    Raises:
+        ValidationError: if md_content and md_file_path are empty.
     """
 
     # Convert markdown to html
