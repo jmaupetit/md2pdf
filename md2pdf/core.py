@@ -6,10 +6,10 @@ from .exceptions import ValidationError
 
 
 __title__ = 'md2pdf'
-__version__ = '0.3'
+__version__ = '0.4'
 __author__ = 'Julien Maupetit'
 __license__ = 'MIT'
-__copyright__ = 'Copyright 2013 Julien Maupetit'
+__copyright__ = 'Copyright 2013-2016 Julien Maupetit'
 
 
 def md2pdf(pdf_file_path, md_content=None, md_file_path=None,
