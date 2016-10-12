@@ -1,4 +1,4 @@
-# md2pdf
+![md2pdf logo](./assets/md2pdf-logo.png)
 
 Convert Markdown files to PDF with styles.
 
@@ -23,7 +23,7 @@ In a few words, here are the few steps you will need to follow:
 
 ### As a CLI
 
-    Usage: 
+    Usage:
         md2pdf [options] INPUT.MD OUTPUT.PDF
 
     Options:
@@ -47,7 +47,7 @@ For testing purpose, I defined [markdown-css-themes](https://github.com/jasonm23
 You can use md2pdf in your python code, like:
 
     from md2pdf.core import md2pdf
-    
+
     md2pdf(md_file_path, pdf_file_path, css_file_path=css_path)
 
 Quite simple.
@@ -69,7 +69,7 @@ Now run your image:
 ### Using custom fonts in styles
 
 WeasyPrint does not support the `@font-face` property yet (see [project issue 28](https://github.com/Kozea/WeasyPrint/issues/28)). If you use want to use custom fonts, you should use system fonts and define them with the `font-family` CSS property, like:
-    
+
     font-family: 'Neutraface Condensed';
 
 Note that you should only define **one single** custom font, not a substitution list.
