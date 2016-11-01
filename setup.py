@@ -14,7 +14,7 @@ setup(
     version = md2pdf.__version__,
     packages = find_packages(),
     scripts = ['scripts/md2pdf',],
-    install_requires = open('requirements.txt').readlines(),
+    install_requires = ["docopt", "weasyprint", "markdown2"],
     author = "Julien Maupetit",
     author_email = "julien@maupetit.net",
     description = "md2pdf, a Markdown to PDF conversion tool",
