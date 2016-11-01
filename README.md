@@ -4,7 +4,11 @@ Convert Markdown files to PDF with styles.
 
 ## Installation
 
-Clone this project first and install it with its dependencies (ideally in a
+```bash
+pip install md2pdf
+```
+
+Alternatively, clone this project first and install it with its dependencies (ideally in a
 virtualenv, see the [virtualenvwrapper project
 documentation](http://virtualenvwrapper.readthedocs.org/en/latest/index.html))
 by typing:
