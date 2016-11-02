@@ -107,9 +107,29 @@ WeasyPrint does not support the `@font-face` property yet (see [project issue
 custom fonts, you should use system fonts and define them with the `font-family`
 CSS property, like:
 
-```css
+```
 font-family: 'Neutraface Condensed';
 ```
 
 Note that you should only define **one single** custom font, not a substitution
 list.
+
+## Contributing
+
+Install development dependencies via:
+
+```
+$ pip install -r requirements-dev.txt
+```
+
+Upload a new release to PyPI:
+
+```
+$ python setup.py sdist bdist_wheel
+$ twine upload dist/* --username 'johndoe' --password 'secret'
+```
+
+## License
+
+`md2pdf` is released under the MIT License. See the bundled LICENSE file for
+details.
