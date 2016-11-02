@@ -1,0 +1,9 @@
+-r requirements.txt
+
+# Tests
+flake8
+pytest
+tox
+
+# PyPI
+twine
