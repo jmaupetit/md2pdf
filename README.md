@@ -52,16 +52,7 @@ $ md2pdf README.md README.pdf
 Optionnaly, you may load an external style (restricted to CSS2):
 
 ```bash
-$ md2pdf README.md README.pdf --css markdown-css-themes/markdown2.css
-```
-
-For testing purpose, I defined
-[markdown-css-themes](https://github.com/jasonm23/markdown-css-themes) as a  git
-submodule. If you want to test this css resource, type:
-
-```bash
-$ git submodule init
-$ git submodule update
+$ md2pdf README.md README.pdf --css tests/resources/input.css
 ```
 
 ### As a library
