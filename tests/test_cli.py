@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import pytest
-
-from md2pdf.exceptions import ValidationError
 from os import remove
 from os.path import exists
 from subprocess import PIPE, Popen
@@ -54,7 +51,8 @@ def test_raise_IOError_when_stylesheet_does_not_exists():
 
     cmd = 'md2pdf --css=styles.css {} {}'.format(INPUT_MD, OUTPUT_PDF)
     stdout, stderr = _run(cmd)
-    assert "IOError: [Errno 2] No such file or directory: 'styles.css'" in stderr
+    expected = "IOError: [Errno 2] No such file or directory: 'styles.css'"
+    assert expected in stderr
 
 
 def test_generate_pdf_from_markdown_source_file():
