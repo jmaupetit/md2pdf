@@ -53,7 +53,7 @@ def test_raise_IOError_when_stylesheet_does_not_exists():
 
     cmd = 'md2pdf --css=styles.css {} {}'.format(INPUT_MD, OUTPUT_PDF)
     stdout, stderr = _run(cmd)
-    expected = "IOError: [Errno 2] No such file or directory: 'styles.css'"
+    expected = 'IOError: [Errno 2] No such file or directory: \'styles.css\''
     assert expected in stderr
 
 

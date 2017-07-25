@@ -34,8 +34,8 @@ def md2pdf(pdf_file_path, md_content=None, md_file_path=None,
     """
 
     # Convert markdown to html
-    raw_html = ""
-    extras = ["cuddled-lists"]
+    raw_html = ''
+    extras = ['cuddled-lists', ]
     if md_file_path:
         raw_html = markdown_path(md_file_path, extras=extras)
     elif md_content:
