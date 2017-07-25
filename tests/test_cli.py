@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from os import remove
 from os.path import exists
 from subprocess import PIPE, Popen
@@ -24,6 +25,7 @@ def _run(cmd):
         stdin=PIPE,
         stdout=PIPE,
         stderr=PIPE,
+        universal_newlines=True,
         close_fds=True
     )
     return p.communicate()

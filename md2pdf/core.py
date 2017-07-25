@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from markdown2 import markdown, markdown_path
 from weasyprint import HTML, CSS
 
