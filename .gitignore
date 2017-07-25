@@ -5,3 +5,4 @@
 build/
 dist/
 env/
+tests/resources/output.pdf
