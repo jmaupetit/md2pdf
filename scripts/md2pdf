@@ -20,7 +20,8 @@ def main(argv=None):
     # Parse command line arguments
     arguments = docopt(
         __doc__,
-        version='md2pdf %s' % __version__)
+        version='md2pdf %s' % __version__
+    )
 
     # Paths
     md_file_path = arguments.get('INPUT.MD')
