@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 from os import remove
 from os.path import exists
 from subprocess import PIPE, Popen
@@ -47,8 +48,10 @@ def test_print_usage_when_partial_args():
 
 def test_raise_IOError_when_markdown_input_file_does_not_exists():
 
-    stdout, stderr = _run('md2pdf input.md output.pdf')
-    expected = 'IOError: [Errno 2] No such file or directory: \'input.md\''
+    cmd = 'md2pdf input.md output.pdf'
+    stdout, stderr = _run(cmd)
+
+    expected = '[Errno 2] No such file or directory: \'input.md\''
     assert expected in stderr
 
 
@@ -56,7 +59,8 @@ def test_raise_IOError_when_stylesheet_does_not_exists():
 
     cmd = 'md2pdf --css=styles.css {} {}'.format(INPUT_MD, OUTPUT_PDF)
     stdout, stderr = _run(cmd)
-    expected = 'IOError: [Errno 2] No such file or directory: \'styles.css\''
+
+    expected = '[Errno 2] No such file or directory: \'styles.css\''
     assert expected in stderr
 
 
