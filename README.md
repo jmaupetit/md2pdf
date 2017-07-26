@@ -1,9 +1,8 @@
-![md2pdf logo](./assets/md2pdf-logo.png)
+![md2pdf logo](https://github.com/jmaupetit/md2pdf/blob/master/assets/md2pdf-logo.png)
 
 Convert Markdown files to PDF with styles.
 
 [![Build Status](https://travis-ci.org/jmaupetit/md2pdf.svg?branch=master)](https://travis-ci.org/jmaupetit/md2pdf)
-
 [![Coverage Status](https://coveralls.io/repos/github/jmaupetit/md2pdf/badge.svg?branch=master)](https://coveralls.io/github/jmaupetit/md2pdf?branch=master)
 
 
@@ -65,7 +64,7 @@ Function arguments:
 
 Install [Docker](https://www.docker.com/)
 
-Pull the image
+Pull the image:
 
 ```bash
 $ docker pull jmaupetit/md2pdf
