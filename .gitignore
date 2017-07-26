@@ -1,6 +1,11 @@
 *.pyc
 *.egg-info
+.cache
+.coverage*
 .DS_Store
+.tox
 build/
 dist/
 env/
+tests/resources/output.pdf
+venv/

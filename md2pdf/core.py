@@ -1,15 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from markdown2 import markdown, markdown_path
 from weasyprint import HTML, CSS
 
 from .exceptions import ValidationError
-
-
-__title__ = 'md2pdf'
-__version__ = '0.4'
-__author__ = 'Julien Maupetit'
-__license__ = 'MIT'
-__copyright__ = 'Copyright 2013-2016 Julien Maupetit'
 
 
 def md2pdf(pdf_file_path, md_content=None, md_file_path=None,
@@ -32,8 +27,8 @@ def md2pdf(pdf_file_path, md_content=None, md_file_path=None,
     """
 
     # Convert markdown to html
-    raw_html = ""
-    extras = ["cuddled-lists"]
+    raw_html = ''
+    extras = ['cuddled-lists', ]
     if md_file_path:
         raw_html = markdown_path(md_file_path, extras=extras)
     elif md_content:
