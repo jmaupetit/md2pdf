@@ -2,33 +2,17 @@
 
 Convert Markdown files to PDF with styles.
 
+[![Build Status](https://travis-ci.org/jmaupetit/md2pdf.svg?branch=master)](https://travis-ci.org/jmaupetit/md2pdf)
+
+[![Coverage Status](https://coveralls.io/repos/github/jmaupetit/md2pdf/badge.svg?branch=master)](https://coveralls.io/github/jmaupetit/md2pdf?branch=master)
+
+
 ## Installation
 
-Clone this project first and install it with its dependencies (ideally in a
-virtualenv, see the [virtualenvwrapper project
-documentation](http://virtualenvwrapper.readthedocs.org/en/latest/index.html))
-by typing:
+The easiest way to go is to use pip:
 
 ```bash
-$ python setup.py install
-```
-
-### Troubleshooting on MacOSX
-
-Ensure, Weasyprint is fully functionnal before using md2pdf. You will find
-installation instructions in the project documentation:
-[http://weasyprint.org/docs/install/](http://weasyprint.org/docs/install/#mac-os-x)
-
-In a few words, here are the few steps you will need to follow:
-
-* Install XQuartz from:
-  [https://xquartz.macosforge.org](https://xquartz.macosforge.org)
-* Install all dependencies at once with
-  [homebrew](http://mxcl.github.io/homebrew/) and go grab a coffee (this may
-  take a while):
-
-```bash
-$ brew install cairo pango gdk-pixbuf libxml2 libxslt libffi
+$ pip install md2pdf
 ```
 
 ## Usage
@@ -49,15 +33,15 @@ For example, try to generate the project documentation with:
 $ md2pdf README.md README.pdf
 ```
 
-Optionnaly, you may load an external style (restricted to CSS2):
+Optionally, you may load an external style (restricted to CSS2):
 
 ```bash
-$ md2pdf README.md README.pdf --css tests/resources/input.css
+$ md2pdf --css tests/resources/input.css README.md README.pdf
 ```
 
 ### As a library
 
-You can use md2pdf in your python code, like:
+You can use `md2pdf` in your python code, like:
 
 ```python
 from md2pdf.core import md2pdf
@@ -69,9 +53,13 @@ md2pdf(pdf_file_path,
        base_url=None)
 ```
 
-See the
-[md2pdf](https://github.com/jmaupetit/md2pdf/blob/master/md2pdf/core.py#L15)
-function's documentation for details.
+Function arguments:
+
+* `pdf_file_path`: output PDF file path
+* `md_content`: input markdown raw string content
+* `md_file_path`: input markdown file path
+* `css_file_path`: input styles path (CSS)
+* `base_url`: absolute base path for markdown linked content (as images)
 
 ### With Docker
 
@@ -87,6 +75,24 @@ Now run your image:
 
 ```bash
 $ docker run --rm -v $PWD:/srv jmaupetit/md2pdf --css styles.css INPUT.MD OUTPUT.PDF
+```
+
+## Troubleshooting on MacOSX
+
+Ensure, Weasyprint is fully functional before using md2pdf. You will find
+installation instructions in the project documentation:
+[http://weasyprint.org/docs/install/](http://weasyprint.org/docs/install/#mac-os-x)
+
+In a few words, here are the few steps you will need to follow:
+
+* Install XQuartz from:
+  [https://xquartz.macosforge.org](https://xquartz.macosforge.org)
+* Install all dependencies at once with
+  [homebrew](http://mxcl.github.io/homebrew/) and go grab a coffee (this may
+  take a while):
+
+```bash
+$ brew install cairo pango gdk-pixbuf libxml2 libxslt libffi
 ```
 
 ## Misc
@@ -107,11 +113,39 @@ list.
 
 ## Contributing
 
-Install development dependencies via:
+### Hacking
 
+Clone this project first:
+
+```bash
+$ git clone git@github.com:jmaupetit/md2pdf.git
 ```
-$ pip install -r requirements-dev.txt
+
+Install it with its dependencies (ideally in a virtual environment):
+
+```bash
+$ cd md2pdf
+$ python -m venv venv
+$ source venv/bin/activate
+(venv) $ pip install -r requirements-dev.txt
+(venv) $ python setup.py develop
 ```
+
+### Running the test suite
+
+To run the test suite with your active python version (virtual environment):
+
+```bash
+(venv) $ pytest
+```
+
+Lint the code via:
+
+```bash
+(venv) $ flake8
+```
+
+### Release a new version
 
 Upload a new release to PyPI:
 
