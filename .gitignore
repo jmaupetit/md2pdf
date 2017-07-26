@@ -2,6 +2,7 @@
 *.egg-info
 .cache
 .DS_Store
+.tox
 build/
 dist/
 env/
