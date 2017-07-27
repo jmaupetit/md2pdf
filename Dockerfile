@@ -1,11 +1,13 @@
-FROM python:2-onbuild
+FROM python:3.6
 
 MAINTAINER Julien Maupetit <julien@maupetit.net>
 
-RUN rm -fr ./md2pdf && \
-  git clone https://github.com/jmaupetit/md2pdf && \
-  cd md2pdf && python setup.py install
+COPY . /usr/local/src/md2pdf
 
-VOLUME ["/srv"]
-WORKDIR /srv
+RUN cd /usr/local/src/md2pdf && \
+  pip install -r requirements.txt && \
+  python setup.py install
+
+VOLUME ["/app"]
+WORKDIR /app
 ENTRYPOINT ["md2pdf"]
