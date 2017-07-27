@@ -38,6 +38,7 @@ setup(
     packages=find_packages(),
     scripts=['scripts/md2pdf', ],
     install_requires=parse_requirements('requirements.txt'),
+    setup_requires=parse_requirements('requirements-dev.txt'),
     tests_require=parse_requirements('requirements-dev.txt'),
     author='Julien Maupetit',
     author_email='julien@maupetit.net',

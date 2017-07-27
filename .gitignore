@@ -3,6 +3,7 @@
 .cache
 .coverage*
 .DS_Store
+.eggs
 .tox
 build/
 dist/
