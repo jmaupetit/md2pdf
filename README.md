@@ -73,7 +73,7 @@ $ docker pull jmaupetit/md2pdf
 Now run your image:
 
 ```bash
-$ docker run --rm -v $PWD:/srv jmaupetit/md2pdf --css styles.css INPUT.MD OUTPUT.PDF
+$ docker run --rm -v $PWD:/app jmaupetit/md2pdf --css styles.css INPUT.MD OUTPUT.PDF
 ```
 
 ## Troubleshooting on MacOSX
