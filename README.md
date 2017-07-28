@@ -1,4 +1,4 @@
-![md2pdf logo](https://github.com/jmaupetit/md2pdf/blob/master/assets/md2pdf-logo.png)
+![md2pdf logo](https://github.com/jmaupetit/md2pdf/raw/master/assets/md2pdf-logo.png)
 
 Convert Markdown files to PDF with styles.
 
