@@ -11,5 +11,7 @@ install:
   - pip install tox
 script:
   - tox -e $TOX_ENV
+before_install: # or any other customizable place
+  - source ~/virtualenv/python3.5/bin/activate
 after_success:
   coveralls
