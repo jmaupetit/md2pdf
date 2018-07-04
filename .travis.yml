@@ -1,7 +1,6 @@
 language: python
 python:
   - '3.6'
-sudo: false
 before_install:
   - if [[ $TOX_ENV = py35 && -f ~/virtualenv/python3.5/bin/activate ]]; then source ~/virtualenv/python3.5/bin/activate; fi
 env:
