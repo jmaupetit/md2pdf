@@ -1,6 +1,9 @@
 language: python
 python:
-  - 3.6
+  - '3.6'
+sudo: false
+before_install:
+  - if [[ $TOXENV = py35 && -f ~/virtualenv/python3.5/bin/activate ]]; then source ~/virtualenv/python3.5/bin/activate; fi
 env:
   - TOX_ENV=flake8
   - TOX_ENV=py27
@@ -11,7 +14,5 @@ install:
   - pip install tox
 script:
   - tox -e $TOX_ENV
-before_install: # or any other customizable place
-  - source ~/virtualenv/python3.5/bin/activate
 after_success:
   coveralls
