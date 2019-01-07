@@ -29,7 +29,7 @@ def parse_requirements(requirements, ignore=('setuptools',)):
             pkg = line.strip()
             if pkg not in ignore:
                 packages.add(pkg)
-        return packages
+        return list(packages)
 
 
 setup(
