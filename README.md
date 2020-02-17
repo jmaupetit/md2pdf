@@ -80,7 +80,7 @@ $ docker run --rm -v $PWD:/app jmaupetit/md2pdf --css styles.css INPUT.MD OUTPUT
 
 Ensure, Weasyprint is fully functional before using md2pdf. You will find
 installation instructions in the project documentation:
-[http://weasyprint.org/docs/install/](http://weasyprint.org/docs/install/#mac-os-x)
+[https://weasyprint.readthedocs.io/en/latest/install.html](https://weasyprint.readthedocs.io/en/latest/install.html#macos)
 
 In a few words, here are the few steps you will need to follow:
 
