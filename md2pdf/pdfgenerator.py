@@ -78,7 +78,7 @@ class PdfGenerator:
             The height of this element, which will be then translated in a html height
         """
         html = HTML(
-            string=getattr(self, f'{element}_html'),
+            string=getattr(self, element+'_html'),
             base_url=self.base_url,
         )
         element_doc = html.render(stylesheets=[CSS(string=self.OVERLAY_LAYOUT), *self.stylesheets])
@@ -134,7 +134,7 @@ class PdfGenerator:
         margins = '{header_size}px {side_margin} {footer_size}px {side_margin}'.format(
             header_size=header_height + self.extra_vertical_margin,
             footer_size=footer_height + self.extra_vertical_margin,
-            side_margin=f'{self.side_margin}cm',
+            side_margin=self.side_margin+'cm',
         )
         content_print_layout = '@page {size: A4 portrait; margin: %s;}' % margins
 
