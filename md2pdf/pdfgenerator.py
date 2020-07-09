@@ -56,8 +56,8 @@ class PdfGenerator:
             footer.
         """
         self.main_html = main_html
-        self.header_html = f"<header>{header_html}</header>" if header_html else None
-        self.footer_html = f"<footer>{footer_html}</footer>" if footer_html else None
+        self.header_html = "<header>"+header_html+"</header>" if header_html else None
+        self.footer_html = "<footer>"+footer_html+"</footer>" if footer_html else None
         self.base_url = base_url
         self.stylesheets = stylesheets
         self.side_margin = side_margin
