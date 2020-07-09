@@ -2,13 +2,14 @@
 from __future__ import unicode_literals
 
 from markdown2 import markdown, markdown_path
-from weasyprint import HTML, CSS
+from weasyprint import CSS
 
 from .exceptions import ValidationError
 from .pdfgenerator import PdfGenerator
 
 
-def md2pdf(pdf_file_path,
+def md2pdf(
+    pdf_file_path,
     md_content=None,
     md_file_path=None,
     css_file_path=None,
