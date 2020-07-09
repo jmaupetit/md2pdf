@@ -134,7 +134,7 @@ class PdfGenerator:
         margins = '{header_size}px {side_margin} {footer_size}px {side_margin}'.format(
             header_size=header_height + self.extra_vertical_margin,
             footer_size=footer_height + self.extra_vertical_margin,
-            side_margin=self.side_margin+'cm',
+            side_margin=str(self.side_margin)+'cm',
         )
         content_print_layout = '@page {size: A4 portrait; margin: %s;}' % margins
 
