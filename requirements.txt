@@ -1,3 +1,4 @@
 WeasyPrint>=51
 docopt
 markdown2
+cairocffi>=1.1.0
