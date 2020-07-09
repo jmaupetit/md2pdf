@@ -7,6 +7,8 @@ Usage: md2pdf [options] INPUT.MD OUTPUT.PDF
 
 Options:
     --css=STYLE.CSS
+    --header=HEADER.HTML
+    --footer=FOOTER.HTML
 """
 import os
 import sys
@@ -27,11 +29,15 @@ def main(argv=None):
     md_file_path = arguments.get('INPUT.MD')
     pdf_file_path = arguments.get('OUTPUT.PDF')
     css_file_path = arguments.get('--css', None)
+    header_file_path = arguments.get('--header', None)
+    footer_file_path = arguments.get('--footer', None)
     base_url = os.getcwd()
 
     md2pdf(pdf_file_path,
            md_file_path=md_file_path,
            css_file_path=css_file_path,
+           header_file_path=header_file_path,
+           footer_file_path=footer_file_path,
            base_url=base_url)
 
     return 0
