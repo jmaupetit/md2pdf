@@ -8,6 +8,7 @@ env:
   - TOX_ENV=py35
   - TOX_ENV=py36
 install:
+  - pip install --upgrade pip
   - pip install tox
 script:
   - tox -e $TOX_ENV
