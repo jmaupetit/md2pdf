@@ -23,7 +23,11 @@ class PdfGenerator:
     - This generator draws its inspiration and, also a bit of its implementation, from this
       discussion in the library github issues: https://github.com/Kozea/WeasyPrint/issues/92
     """
-    OVERLAY_LAYOUT = '@page {size: A4 portrait; margin: 0;}'
+    OVERLAY_LAYOUT = """
+        @page {size: A4 portrait; margin: 0;}
+        header {position: fixed; top: 0; left: 0; right: 0;}
+        footer {position: fixed; bottom: 0; left: 0; right: 0;}
+    """
 
     def __init__(
         self,
@@ -63,89 +67,78 @@ class PdfGenerator:
         self.side_margin = side_margin
         self.extra_vertical_margin = extra_vertical_margin
 
+    def _compute_element(self, element: str, element_string: str, page: int, pages: int):
+        """
+        Returns : element_body (BlockBox) : Weasyprint pre-render of an html element
+        """
+        html = HTML(string=element_string, base_url=self.base_url)
+        print(page)
+        element_doc = html.render(
+            stylesheets=[
+                CSS(string=self.OVERLAY_LAYOUT),
+                CSS(string="""footer, header {
+                    counter-increment: page """+str(page)+""" pages """+str(pages)+""";
+                }"""),
+                *self.stylesheets,
+            ]
+        )
+        element_page = element_doc.pages[0]
+        element_body = PdfGenerator.get_element(element_page._page_box.all_children(), "body")
+        element_body = element_body.copy_with_children(element_body.all_children())
+        return element_body
+
     def _compute_overlay_element(self, element: str):
         """
-        Parameters
-        ----------
-        element: str
-            Either 'header' or 'footer'
-
-        Returns
-        -------
-        element_body: BlockBox
-            A Weasyprint pre-rendered representation of an html element
-        element_height: float
-            The height of this element, which will be then translated in a html height
+        Parameter :  element (str) : Either "header" or "footer"
+        Sets element_body (BlockBox) : A Weasyprint pre-rendered representation of an html element
+        Sets element_height (float) :  Height of this element, will be translated in a html height
+        If element is not found, set self."element"_body, self."element_height" to None, 0
         """
-        html = HTML(
-            string=getattr(self, element+'_html'),
-            base_url=self.base_url,
-        )
-        element_doc = html.render(stylesheets=[CSS(string=self.OVERLAY_LAYOUT), *self.stylesheets])
-        element_page = element_doc.pages[0]
-        element_body = PdfGenerator.get_element(element_page._page_box.all_children(), 'body')
-        element_body = element_body.copy_with_children(element_body.all_children())
-        element_html = PdfGenerator.get_element(element_page._page_box.all_children(), element)
-
-        if element == 'header':
+        element_string = getattr(self, element+"_html")
+        if not element_string:
+            element_height = 0
+        else:
+            element_body = self._compute_element(element, element_string, 1, 1)
+            element_html = PdfGenerator.get_element(element_body.all_children(), element)
             element_height = element_html.height
-        if element == 'footer':
-            element_height = element_page.height - element_html.position_y
+        setattr(self, element+"_height", element_height)
 
-        return element_body, element_height
-
-    def _apply_overlay_on_main(self, main_doc, header_body=None, footer_body=None):
+    def _apply_overlay_on_main(self, main_doc):
         """
         Insert the header and the footer in the main document.
-
-        Parameters
-        ----------
-        main_doc: Document
-            The top level representation for a PDF page in Weasyprint.
-        header_body: BlockBox
-            A representation for an html element in Weasyprint.
-        footer_body: BlockBox
-            A representation for an html element in Weasyprint.
+        Parameter : main_doc (Document) : The top level representation for a PDF page in Weasyprint
         """
-        for page in main_doc.pages:
-            page_body = PdfGenerator.get_element(page._page_box.all_children(), 'body')
+        for page_number, page in enumerate(main_doc.pages, start=1):
+            page_body = PdfGenerator.get_element(page._page_box.all_children(), "body")
 
-            if header_body:
-                page_body.children += header_body.all_children()
-            if footer_body:
-                page_body.children += footer_body.all_children()
+            if self.header_html:
+                page_body.children += self._compute_element(
+                    "header", self.header_html, page_number, len(main_doc.pages)
+                ).all_children()
+            if self.footer_html:
+                page_body.children += self._compute_element(
+                    "footer", self.footer_html, page_number, len(main_doc.pages)
+                ).all_children()
 
     def render_pdf(self):
         """
-        Returns
-        -------
-        pdf: a bytes sequence
-            The rendered PDF.
+        Returns: pdf (a bytes sequence) : The rendered PDF
         """
-        if self.header_html:
-            header_body, header_height = self._compute_overlay_element('header')
-        else:
-            header_body, header_height = None, 0
-        if self.footer_html:
-            footer_body, footer_height = self._compute_overlay_element('footer')
-        else:
-            footer_body, footer_height = None, 0
+        self._compute_overlay_element("header")
+        self._compute_overlay_element("footer")
 
-        margins = '{header_size}px {side_margin} {footer_size}px {side_margin}'.format(
-            header_size=header_height + self.extra_vertical_margin,
-            footer_size=footer_height + self.extra_vertical_margin,
-            side_margin=str(self.side_margin)+'cm',
+        margins = "{header_size}px {side_margin} {footer_size}px {side_margin}".format(
+            header_size=self.header_height + self.extra_vertical_margin,
+            footer_size=self.footer_height + self.extra_vertical_margin,
+            side_margin=str(self.side_margin)+"cm",
         )
-        content_print_layout = '@page {size: A4 portrait; margin: %s;}' % margins
+        content_print_layout = "@page {size: A4 portrait; margin: %s;}" % margins
 
-        html = HTML(
-            string=self.main_html,
-            base_url=self.base_url,
-        )
+        html = HTML(string=self.main_html, base_url=self.base_url)
         main_doc = html.render(stylesheets=[CSS(string=content_print_layout), *self.stylesheets])
 
         if self.header_html or self.footer_html:
-            self._apply_overlay_on_main(main_doc, header_body, footer_body)
+            self._apply_overlay_on_main(main_doc)
         pdf = main_doc.write_pdf()
 
         return pdf
