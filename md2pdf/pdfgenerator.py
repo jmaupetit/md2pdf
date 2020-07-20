@@ -72,7 +72,6 @@ class PdfGenerator:
         Returns : element_body (BlockBox) : Weasyprint pre-render of an html element
         """
         html = HTML(string=element_string, base_url=self.base_url)
-        print(page)
         element_doc = html.render(
             stylesheets=[
                 CSS(string=self.OVERLAY_LAYOUT),
