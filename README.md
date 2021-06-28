@@ -1,3 +1,5 @@
+# This is an old repository, see https://github.com/c4ffein/txt2pdf/
+
 ![md2pdf logo](https://github.com/jmaupetit/md2pdf/raw/master/assets/md2pdf-logo.png)
 
 Convert Markdown files to PDF with styles.
