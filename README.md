@@ -1,3 +1,5 @@
+# This is an old repository, see https://github.com/c4ffein/txt2pdf/
+
 ![md2pdf logo](https://github.com/jmaupetit/md2pdf/raw/master/assets/md2pdf-logo.png)
 
 Convert Markdown files to PDF with styles.
@@ -38,6 +40,13 @@ Optionally, you may load an external style (restricted to CSS2):
 $ md2pdf --css tests/resources/input.css README.md README.pdf
 ```
 
+You may also include a HTML header and footer :
+
+```bash
+$ md2pdf --header tests/resources/header.html README.md README.pdf
+$ md2pdf --footer tests/resources/footer.html README.md README.pdf
+```
+
 ### As a library
 
 You can use `md2pdf` in your python code, like:
@@ -49,6 +58,10 @@ md2pdf(pdf_file_path,
        md_content=None,
        md_file_path=None,
        css_file_path=None,
+       html_header_content=None,
+       html_header_file_path=None,
+       html_footer_content=None,
+       html_footer_file_path=None,
        base_url=None)
 ```
 
@@ -58,6 +71,10 @@ Function arguments:
 * `md_content`: input markdown raw string content
 * `md_file_path`: input markdown file path
 * `css_file_path`: input styles path (CSS)
+* `html_header_content`: input HTML header raw string content
+* `html_header_file_path`: input HTML header file path
+* `html_footer_content`: input HTML footer raw string content
+* `html_footer_file_path`: input HTML footer file path
 * `base_url`: absolute base path for markdown linked content (as images)
 
 ### With Docker
