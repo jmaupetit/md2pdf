@@ -1,5 +1,10 @@
 # Changelog
 
+## Release 0.6 (2023/04/07)
+
+- Add markdown footnotes support
+- Fix package entrypoint for windows
+
 ## Release 0.5 (2021/01/21)
 
 - Add markdown table support
