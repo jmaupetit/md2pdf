@@ -4,7 +4,7 @@
 md2pdf - setup file
 """
 
-from importlib.metadata import version
+from pathlib import Path
 
 from setuptools import setup, find_packages
 
@@ -32,9 +32,13 @@ def parse_requirements(requirements, ignore=("setuptools",)):
         return list(packages)
 
 
+about = {}
+with Path("md2pdf", "version.py").open(mode="r", encoding="utf-8") as f:
+    exec(f.read(), about)
+
 setup(
     name="md2pdf",
-    version=version("md2pdf"),
+    version=about["__version__"],
     packages=find_packages(),
     install_requires=parse_requirements("requirements.txt"),
     setup_requires=[
