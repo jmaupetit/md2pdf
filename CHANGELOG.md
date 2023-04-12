@@ -1,5 +1,9 @@
 # Changelog
 
+## Release 1.0.1 (2023/04/12)
+
+-   Fix md2pdf module loading during installation
+
 ## Release 1.0.0 (2023/04/12)
 
 -   Fix installation issue
