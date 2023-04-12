@@ -10,3 +10,4 @@ tox
 
 # PyPI
 twine
+wheel
