@@ -24,6 +24,7 @@ Usage:
 
 Options:
     --css=STYLE.CSS
+    --new-extras=extras1,extras2,extras2 (separated by comma)
 ```
 
 For example, try to generate the project documentation with:
@@ -38,6 +39,14 @@ Optionally, you may load an external style (restricted to CSS2):
 $ md2pdf --css tests/resources/input.css README.md README.pdf
 ```
 
+Optionally, you may add [extras](https://github.com/trentm/python-markdown2/wiki/Extras) to the convertion:
+
+```bash
+$ md2pdf README.md README.pdf --new-extras=fenced-code-blocks
+
+$ md2pdf README.md README.pdf --new-extras=fenced-code-blocks,mermaid
+```
+
 ### As a library
 
 You can use `md2pdf` in your python code, like:
@@ -49,7 +58,8 @@ md2pdf(pdf_file_path,
        md_content=None,
        md_file_path=None,
        css_file_path=None,
-       base_url=None)
+       base_url=None,
+       new_extras=None)
 ```
 
 Function arguments:
@@ -59,6 +69,7 @@ Function arguments:
 * `md_file_path`: input markdown file path
 * `css_file_path`: input styles path (CSS)
 * `base_url`: absolute base path for markdown linked content (as images)
+* `new_extras`: list of new extras separated by comma
 
 ### With Docker
 
