@@ -8,7 +8,7 @@ from .exceptions import ValidationError
 
 
 def md2pdf(pdf_file_path, md_content=None, md_file_path=None,
-           css_file_path=None, base_url=None):
+           css_file_path=None, base_url=None, new_extras=None):
     """
     Converts input markdown to styled HTML and renders it to a PDF file.
 
@@ -28,7 +28,12 @@ def md2pdf(pdf_file_path, md_content=None, md_file_path=None,
 
     # Convert markdown to html
     raw_html = ''
-    extras = ['cuddled-lists', 'tables']
+    if new_extras == None:
+        new_extras = []
+    else:
+        new_extras = [x.strip() for x in new_extras.split(',')]
+    extras = ['cuddled-lists', 'tables', 'footnotes']
+    [extras.append(x) for x in new_extras if x not in extras]
     if md_file_path:
         raw_html = markdown_path(md_file_path, extras=extras)
     elif md_content:

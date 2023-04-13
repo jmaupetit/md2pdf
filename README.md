@@ -24,6 +24,7 @@ Usage:
 
 Options:
     --css=STYLE.CSS
+    --new-extras=extras1,extras2,extras2 (separated by comma)
 ```
 
 For example, try to generate the project documentation with:
@@ -49,7 +50,8 @@ md2pdf(pdf_file_path,
        md_content=None,
        md_file_path=None,
        css_file_path=None,
-       base_url=None)
+       base_url=None,
+       new_extras=None)
 ```
 
 Function arguments:
@@ -59,6 +61,7 @@ Function arguments:
 * `md_file_path`: input markdown file path
 * `css_file_path`: input styles path (CSS)
 * `base_url`: absolute base path for markdown linked content (as images)
+* `new_extras`: list of new extras separated by comma
 
 ### With Docker
 
