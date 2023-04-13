@@ -39,6 +39,14 @@ Optionally, you may load an external style (restricted to CSS2):
 $ md2pdf --css tests/resources/input.css README.md README.pdf
 ```
 
+Optionally, you may add [extras](https://github.com/trentm/python-markdown2/wiki/Extras) to the convertion:
+
+```bash
+$ md2pdf README.md README.pdf --new-extras=fenced-code-blocks
+
+$ md2pdf README.md README.pdf --new-extras=fenced-code-blocks,mermaid
+```
+
 ### As a library
 
 You can use `md2pdf` in your python code, like:
