@@ -1,9 +1,9 @@
-![md2pdf logo](https://github.com/jmaupetit/md2pdf/raw/master/assets/md2pdf-logo.png)
+![md2pdf logo](https://github.com/jmaupetit/md2pdf/raw/main/assets/md2pdf-logo.png)
 
 Convert Markdown files to PDF with styles.
 
-[![Build Status](https://travis-ci.org/jmaupetit/md2pdf.svg?branch=master)](https://travis-ci.org/jmaupetit/md2pdf)
-[![Coverage Status](https://coveralls.io/repos/github/jmaupetit/md2pdf/badge.svg?branch=master)](https://coveralls.io/github/jmaupetit/md2pdf?branch=master)
+[![Build Status](https://travis-ci.org/jmaupetit/md2pdf.svg?branch=main)](https://travis-ci.org/jmaupetit/md2pdf)
+[![Coverage Status](https://coveralls.io/repos/github/jmaupetit/md2pdf/badge.svg?branch=main)](https://coveralls.io/github/jmaupetit/md2pdf?branch=main)
 
 
 ## Installation
