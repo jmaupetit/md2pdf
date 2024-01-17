@@ -135,11 +135,10 @@ To run the test suite with your active python version (virtual environment):
 $ poetry run pytest
 ```
 
-**FIXME**
 Lint the code via:
 
 ```bash
-(venv) $ flake8
+$ poetry run ruff md2pdf
 ```
 
 ### Release a new version

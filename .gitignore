@@ -4,6 +4,7 @@
 .coverage*
 .DS_Store
 .eggs
+.ruff_cache
 .pytest_cache
 .tox
 __pycache__/
