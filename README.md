@@ -120,14 +120,11 @@ Clone this project first:
 $ git clone git@github.com:jmaupetit/md2pdf.git
 ```
 
-Install it with its dependencies (ideally in a virtual environment):
+Install md2pdf along with its dependencies (using [Poetry](https://python-poetry.org)):
 
 ```bash
 $ cd md2pdf
-$ python -m venv venv
-$ source venv/bin/activate
-(venv) $ pip install -r requirements-dev.txt
-(venv) $ python setup.py develop
+$ poetry install
 ```
 
 ### Running the test suite
@@ -135,9 +132,10 @@ $ source venv/bin/activate
 To run the test suite with your active python version (virtual environment):
 
 ```bash
-(venv) $ pytest
+$ poetry run pytest
 ```
 
+**FIXME**
 Lint the code via:
 
 ```bash
@@ -149,8 +147,8 @@ Lint the code via:
 Upload a new release to PyPI:
 
 ```
-$ python setup.py sdist bdist_wheel
-$ twine upload dist/* --username 'johndoe' --password 'secret'
+$ poetry build
+$ poetry publish
 ```
 
 ## License

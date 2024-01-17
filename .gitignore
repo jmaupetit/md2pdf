@@ -1,10 +1,13 @@
-*.pyc
+*.py[cod]
 *.egg-info
 .cache
 .coverage*
 .DS_Store
 .eggs
+.pytest_cache
 .tox
+__pycache__/
+
 build/
 dist/
 env/

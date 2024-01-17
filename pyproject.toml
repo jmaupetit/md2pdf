@@ -1,0 +1,63 @@
+[tool.poetry]
+name = "md2pdf"
+version = "1.0.1"
+description = "The Markdown to PDF conversion tool with styles"
+authors = ["Julien Maupetit <julien@maupetit.net>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/jmaupetit/md2pdf"
+repository = "https://github.com/jmaupetit/md2pdf"
+keywords = ["markdown", "pdf", "html", "css", "cli"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Environment :: Console",
+  "Operating System :: MacOS",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Office/Business",
+  "Topic :: Utilities",
+]
+packages = [
+  { include = "md2pdf" },
+]
+include = [
+  "LICENSE",
+  "README.md",
+]
+exclude = [
+  "tests",
+]
+
+[tool.poetry.scripts]
+md2pdf = "md2pdf.__main__:main"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+weasyprint = "^60.2"
+docopt = "^0.6.2"
+markdown2 = "^2.4.12"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.4"
+pytest-cov = "^4.1.0"
+
+[tool.pytest.ini_options]
+addopts = "-vs --cov=md2pdf --cov-report term-missing"
+python_files = [
+    "test_*.py",
+    "tests.py",
+]
+testpaths = [
+    "tests",
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
