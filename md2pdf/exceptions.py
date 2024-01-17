@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-
+"""md2pdf exceptions."""
 
 class ValidationError(Exception):
-    pass
+    """md2pdf validation error."""
+    ...

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+"""md2pdf tests defaults."""
 
 # Test files paths
 INPUT_CSS = 'tests/resources/input.css'

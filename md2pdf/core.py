@@ -1,16 +1,13 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
+"""md2pdf core module."""
 from markdown2 import markdown, markdown_path
-from weasyprint import HTML, CSS
+from weasyprint import CSS, HTML
 
 from .exceptions import ValidationError
 
 
 def md2pdf(pdf_file_path, md_content=None, md_file_path=None,
            css_file_path=None, base_url=None):
-    """
-    Converts input markdown to styled HTML and renders it to a PDF file.
+    """Converts input markdown to styled HTML and renders it to a PDF file.
 
     Args:
         pdf_file_path: output PDF file path.
@@ -25,7 +22,6 @@ def md2pdf(pdf_file_path, md_content=None, md_file_path=None,
     Raises:
         ValidationError: if md_content and md_file_path are empty.
     """
-
     # Convert markdown to html
     raw_html = ''
     extras = ['cuddled-lists', 'tables', 'footnotes']
@@ -48,4 +44,3 @@ def md2pdf(pdf_file_path, md_content=None, md_file_path=None,
     # Generate PDF
     html.write_pdf(pdf_file_path, stylesheets=css)
 
-    return
