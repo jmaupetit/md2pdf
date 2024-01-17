@@ -17,6 +17,10 @@ build: ## build python package
 	$(POETRY) build
 .PHONY: build
 
+build-docker: ## build Docker image
+	docker build . --target production -t md2pdf:latest
+.PHONY: build-docker
+
 install: ## install project with its dependencies
 	$(POETRY_RUN) install
 .PHONY: install
