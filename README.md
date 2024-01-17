@@ -150,6 +150,14 @@ $ poetry build
 $ poetry publish
 ```
 
+### Ease your life
+
+If you are familiar with GNU Make, we also automate daily tasks using this lovely tool:
+
+```bash
+$ make help
+```
+
 ## License
 
 `md2pdf` is released under the MIT License. See the bundled LICENSE file for
