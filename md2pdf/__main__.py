@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """md2pdf - Markdown to PDF conversion tool.
 
 Usage: md2pdf [options] INPUT.MD OUTPUT.PDF
@@ -10,17 +7,21 @@ Options:
 """
 import os
 import sys
+from importlib.metadata import version
 
 from docopt import docopt
-from md2pdf import md2pdf, __version__
+
+from md2pdf.core import md2pdf
 
 
 def main(argv=None):
+    """md2pdf main script."""
+    __version__ = version("md2pdf")
 
     # Parse command line arguments
     arguments = docopt(
         __doc__,
-        version='md2pdf %s' % __version__
+        version=f"md2pdf {__version__}"
     )
 
     # Paths
