@@ -32,7 +32,7 @@ jobs:
         poetry install --with dev
     - name: Lint with ruff
       run: |
-        ruff md2pdf
+        poetry run ruff md2pdf
     - name: Test with pytest
       run: |
-        pytest
+        poetry run pytest
