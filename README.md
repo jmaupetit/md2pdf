@@ -14,6 +14,9 @@ The easiest way to go is to use pip:
 $ pip install md2pdf
 ```
 
+_Nota bene:_ ensure, Weasyprint is fully functional before using md2pdf. You will find
+installation instructions in the project documentation: [https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#installation](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#installation)
+
 ## Usage
 
 ### As a CLI
@@ -78,40 +81,6 @@ $ docker run --rm \
     -u "$(id -u):$(id -g)" \
     jmaupetit/md2pdf --css styles.css INPUT.MD OUTPUT.PDF
 ```
-
-## Troubleshooting on MacOSX
-
-Ensure, Weasyprint is fully functional before using md2pdf. You will find
-installation instructions in the project documentation:
-[https://weasyprint.readthedocs.io/en/latest/install.html](https://weasyprint.readthedocs.io/en/latest/install.html#macos)
-
-In a few words, here are the few steps you will need to follow:
-
-* Install XQuartz from:
-  [https://xquartz.macosforge.org](https://xquartz.macosforge.org)
-* Install all dependencies at once with
-  [homebrew](http://mxcl.github.io/homebrew/) and go grab a coffee (this may
-  take a while):
-
-```bash
-$ brew install cairo pango gdk-pixbuf libxml2 libxslt libffi
-```
-
-## Misc
-
-### Using custom fonts in styles
-
-WeasyPrint does not support the `@font-face` property yet (see [project issue
-28](https://github.com/Kozea/WeasyPrint/issues/28)). If you use want to use
-custom fonts, you should use system fonts and define them with the `font-family`
-CSS property, like:
-
-```
-font-family: 'Neutraface Condensed';
-```
-
-Note that you should only define **one single** custom font, not a substitution
-list.
 
 ## Contributing
 
