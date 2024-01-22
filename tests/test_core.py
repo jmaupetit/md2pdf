@@ -7,7 +7,7 @@ import pytest
 from md2pdf import md2pdf
 from md2pdf.exceptions import ValidationError
 
-from .defaults import OUTPUT_PDF
+from .defaults import INPUT_MD, OUTPUT_PDF
 
 
 def setup_function(function):
@@ -16,11 +16,18 @@ def setup_function(function):
         remove(OUTPUT_PDF)
 
 
+def test_generate_pdf_from_markdown_file():
+    """Generate a PDF from markdown file content."""
+    assert not exists(OUTPUT_PDF)
+
+    md2pdf(pdf=OUTPUT_PDF, md=INPUT_MD)
+    assert exists(OUTPUT_PDF)
+
 def test_generate_pdf_from_raw_markdown():
     """Generate a PDF from raw markdown content."""
     assert not exists(OUTPUT_PDF)
 
-    md2pdf(OUTPUT_PDF, md_content='# hi there!')
+    md2pdf(OUTPUT_PDF, raw='# hi there!')
     assert exists(OUTPUT_PDF)
 
 
