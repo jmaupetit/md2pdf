@@ -34,7 +34,7 @@ def md2pdf(pdf_file_path, md_content=None, md_file_path=None,
         raise ValidationError('Input markdown seems empty')
 
     # Weasyprint HTML object
-    html = HTML(string=raw_html, base_url=base_url)
+    html = HTML(string=raw_html, base_url=str(base_url))
 
     # Get styles
     css = []

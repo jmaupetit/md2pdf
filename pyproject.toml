@@ -36,13 +36,13 @@ exclude = [
 ]
 
 [tool.poetry.scripts]
-md2pdf = "md2pdf.__main__:main"
+md2pdf = "md2pdf.__main__:cli.cli"
 
 [tool.poetry.dependencies]
 python = "^3.8"
 weasyprint = "^60.2"
-docopt = "^0.6.2"
 markdown2 = "^2.4.12"
+click = "^8.1.7"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.4"
