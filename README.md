@@ -38,7 +38,7 @@ $ md2pdf README.md README.pdf
 Optionally, you may load an external style (restricted to CSS2):
 
 ```bash
-$ md2pdf --css tests/resources/input.css README.md README.pdf
+$ md2pdf --css tests/assets/input.css README.md README.pdf
 ```
 
 ### As a library

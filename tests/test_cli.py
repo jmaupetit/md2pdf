@@ -4,6 +4,9 @@ from os import remove
 from os.path import exists
 from subprocess import run
 
+from click.testing import CliRunner
+
+from md2pdf.cli import cli
 from .defaults import INPUT_CSS, INPUT_MD, OUTPUT_PDF
 
 
@@ -15,47 +18,55 @@ def setup_function(function):
 
 def test_print_usage_when_no_args():
     """Print usage when no arguments are passed."""
-    process = run(["md2pdf"], capture_output=True, check=False)
-    expected = b"Usage: md2pdf [options] INPUT.MD OUTPUT.PDF"
-    assert expected in process.stderr
+    runner = CliRunner()
+    result = runner.invoke(cli)
+    expected = "Usage: md2pdf [OPTIONS] MD_FILE_PATH PDF_FILE_PATH"
+    assert result.exit_code == 2
+    assert expected in result.output
 
 
 def test_print_usage_when_partial_args():
     """Print usage when required arguments are missing."""
-    process = run(["md2pdf", "input.md"], capture_output=True, check=False)
-    expected = b"Usage: md2pdf [options] INPUT.MD OUTPUT.PDF"
-    assert expected in process.stderr
+    runner = CliRunner()
+    result = runner.invoke(cli, ["input.md"])
+    expected = "Usage: md2pdf [OPTIONS] MD_FILE_PATH PDF_FILE_PATH"
+    assert result.exit_code == 2
+    assert expected in result.output
 
 
 def test_raise_IOError_when_markdown_input_file_does_not_exists():
     """Raise an I/O error when markdown input file does not exist."""
-    process = run(
-        ["md2pdf", "input.md", "output.pdf"], capture_output=True, check=False
+    runner = CliRunner()
+    result = runner.invoke(cli, ["input.md", "output.pdf"])
+    expected = (
+        "Error: Invalid value for 'MD_FILE_PATH': Path 'input.md' does not exist."
     )
-    expected = b"[Errno 2] No such file or directory: 'input.md'"
-    assert expected in process.stderr
+    assert result.exit_code == 2
+    assert expected in result.output
 
 
 def test_raise_IOError_when_stylesheet_does_not_exists():
     """Raise an I/O error when CSS input file does not exist."""
-    process = run(
-        ["md2pdf", "--css=styles.css", INPUT_MD, OUTPUT_PDF],
-        capture_output=True,
-        check=False,
+    runner = CliRunner()
+    result = runner.invoke(cli, ["--css=styles.css", str(INPUT_MD), str(OUTPUT_PDF)])
+    expected = (
+        "Error: Invalid value for '--css': Path 'styles.css' does not exist."
     )
-    expected = b"[Errno 2] No such file or directory: 'styles.css'"
-    assert expected in process.stderr
+    assert result.exit_code == 2
+    assert expected in result.output
 
 
 def test_generate_pdf_from_markdown_source_file():
     """Generate a PDF from a markdown file."""
-    assert not exists(OUTPUT_PDF)
-    run(["md2pdf", INPUT_MD, OUTPUT_PDF], check=False)
-    assert exists(OUTPUT_PDF)
+    assert not OUTPUT_PDF.exists()
+    runner = CliRunner()
+    runner.invoke(cli, [str(INPUT_MD), str(OUTPUT_PDF)])
+    assert OUTPUT_PDF.exists()
 
 
 def test_generate_pdf_from_markdown_source_file_and_stylesheet():
     """Generate a PDF from a markdown and a CSS file."""
-    assert not exists(OUTPUT_PDF)
-    run(["md2pdf", f"--css={INPUT_CSS}", INPUT_MD, OUTPUT_PDF], check=False)
-    assert exists(OUTPUT_PDF)
+    assert not OUTPUT_PDF.exists()
+    runner = CliRunner()
+    runner.invoke(cli, [f"--css={INPUT_CSS}", str(INPUT_MD), str(OUTPUT_PDF)])
+    assert OUTPUT_PDF.exists()
