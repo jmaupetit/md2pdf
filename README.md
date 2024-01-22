@@ -22,11 +22,15 @@ installation instructions in the project documentation: [https://doc.courtbouill
 ### As a CLI
 
 ```
-Usage:
-    md2pdf [options] INPUT.MD OUTPUT.PDF
+Usage: md2pdf [OPTIONS] MD PDF
+
+  md2pdf command line tool.
 
 Options:
-    --css=STYLE.CSS
+  --css PATH
+  -e, --extras TEXT
+  --version          Show the version and exit.
+  --help             Show this message and exit.
 ```
 
 For example, try to generate the project documentation with:
@@ -35,11 +39,18 @@ For example, try to generate the project documentation with:
 $ md2pdf README.md README.pdf
 ```
 
-Optionally, you may load an external style (restricted to CSS2):
+Optionally, you may load an external style:
 
 ```bash
 $ md2pdf --css tests/assets/input.css README.md README.pdf
 ```
+
+And/or activate [markdown extras](https://github.com/trentm/python-markdown2/wiki/Extras):
+
+```bash
+$ md2pdf --css pygments.css -e fenced-code-blocks README.md README.pdf
+```
+
 
 ### As a library
 
@@ -48,20 +59,23 @@ You can use `md2pdf` in your python code, like:
 ```python
 from md2pdf.core import md2pdf
 
-md2pdf(pdf_file_path,
-       md_content=None,
-       md_file_path=None,
-       css_file_path=None,
-       base_url=None)
+md2pdf(pdf,
+       md=None,
+       raw=None,
+       css=None,
+       base_url=None,
+       extras=[],
+)
 ```
 
 Function arguments:
 
-* `pdf_file_path`: output PDF file path
-* `md_content`: input markdown raw string content
-* `md_file_path`: input markdown file path
-* `css_file_path`: input styles path (CSS)
+* `pdf`: output PDF file path
+* `raw`: input markdown raw string content
+* `md`: input markdown file path
+* `css`: input styles path (CSS)
 * `base_url`: absolute base path for markdown linked content (as images)
+* `extras`: [markdown extras](https://github.com/trentm/python-markdown2/wiki/Extras) that should be activated
 
 ### With Docker
 
