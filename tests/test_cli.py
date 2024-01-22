@@ -20,7 +20,7 @@ def test_print_usage_when_no_args():
     """Print usage when no arguments are passed."""
     runner = CliRunner()
     result = runner.invoke(cli)
-    expected = "Usage: md2pdf [OPTIONS] MD_FILE_PATH PDF_FILE_PATH"
+    expected = "Usage: md2pdf [OPTIONS] MD PDF"
     assert result.exit_code == 2
     assert expected in result.output
 
@@ -29,7 +29,7 @@ def test_print_usage_when_partial_args():
     """Print usage when required arguments are missing."""
     runner = CliRunner()
     result = runner.invoke(cli, ["input.md"])
-    expected = "Usage: md2pdf [OPTIONS] MD_FILE_PATH PDF_FILE_PATH"
+    expected = "Usage: md2pdf [OPTIONS] MD PDF"
     assert result.exit_code == 2
     assert expected in result.output
 
@@ -39,7 +39,7 @@ def test_raise_IOError_when_markdown_input_file_does_not_exists():
     runner = CliRunner()
     result = runner.invoke(cli, ["input.md", "output.pdf"])
     expected = (
-        "Error: Invalid value for 'MD_FILE_PATH': Path 'input.md' does not exist."
+        "Error: Invalid value for 'MD': Path 'input.md' does not exist."
     )
     assert result.exit_code == 2
     assert expected in result.output
