@@ -5,7 +5,7 @@ from typing import List, Optional
 
 import frontmatter
 from jinja2 import Template
-from markdown2 import markdown
+from markdown import markdown
 from weasyprint import CSS, HTML
 
 from .conf import MARKDOWN_EXTRAS
@@ -57,7 +57,7 @@ def md2pdf(
         # Render the template
         raw = Template(template).render(context)
 
-    raw_html = markdown(raw, extras=extras)
+    raw_html = markdown(raw, extensions=extras)
 
     # Weasyprint HTML object
     if base_url is None:

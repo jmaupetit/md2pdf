@@ -6,7 +6,7 @@ from typing import Optional
 
 import click
 
-from md2pdf.core import md2pdf
+from .core import md2pdf
 
 logger = logging.getLogger(__name__)
 
