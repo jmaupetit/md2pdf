@@ -59,12 +59,11 @@ You can use `md2pdf` in your python code, like:
 ```python
 from md2pdf.core import md2pdf
 
-md2pdf(pdf,
-       md=None,
-       raw=None,
-       css=None,
+md2pdf(pdf_file_path,
+       md_file_path=None,
+       md_content=None,
+       css_file_path=None,
        base_url=None,
-       extras=[],
 )
 ```
 
@@ -75,7 +74,6 @@ Function arguments:
 * `md`: input markdown file path
 * `css`: input styles path (CSS)
 * `base_url`: absolute base path for markdown linked content (as images)
-* `extras`: [markdown extras](https://github.com/trentm/python-markdown2/wiki/Extras) that should be activated
 
 ### With Docker
 
