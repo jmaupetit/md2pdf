@@ -7,6 +7,7 @@ import frontmatter
 from jinja2 import Template
 from markdown import markdown
 from weasyprint import CSS, HTML
+from weasyprint.text.fonts import FontConfiguration
 
 from .conf import MARKDOWN_EXTRAS
 from .exceptions import ValidationError
@@ -66,8 +67,9 @@ def md2pdf(
 
     # Get styles
     styles: list = []
+    font_config = FontConfiguration()
     if css:
-        styles.append(CSS(filename=css))
+        styles.append(CSS(filename=css), font_config=font_config)
 
     # Generate PDF
-    html.write_pdf(pdf, stylesheets=styles)
+    html.write_pdf(pdf, stylesheets=styles, font_config=font_config)
