@@ -2,11 +2,11 @@
 
 from os import remove
 from os.path import exists
-from subprocess import run
 
 from click.testing import CliRunner
 
 from md2pdf.cli import cli
+
 from .defaults import INPUT_CSS, INPUT_MD, OUTPUT_PDF
 
 
@@ -38,9 +38,7 @@ def test_raise_IOError_when_markdown_input_file_does_not_exists():
     """Raise an I/O error when markdown input file does not exist."""
     runner = CliRunner()
     result = runner.invoke(cli, ["input.md", "output.pdf"])
-    expected = (
-        "Error: Invalid value for 'MD': Path 'input.md' does not exist."
-    )
+    expected = "Error: Invalid value for 'MD': Path 'input.md' does not exist."
     assert result.exit_code == 2
     assert expected in result.output
 
@@ -49,9 +47,7 @@ def test_raise_IOError_when_stylesheet_does_not_exists():
     """Raise an I/O error when CSS input file does not exist."""
     runner = CliRunner()
     result = runner.invoke(cli, ["--css=styles.css", str(INPUT_MD), str(OUTPUT_PDF)])
-    expected = (
-        "Error: Invalid value for '--css': Path 'styles.css' does not exist."
-    )
+    expected = "Error: Invalid value for '--css': Path 'styles.css' does not exist."
     assert result.exit_code == 2
     assert expected in result.output
 

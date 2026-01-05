@@ -1,4 +1,5 @@
 """md2pdf tests for the core module."""
+
 from os import remove
 from os.path import exists
 
@@ -23,11 +24,12 @@ def test_generate_pdf_from_markdown_file():
     md2pdf(pdf=OUTPUT_PDF, md=INPUT_MD)
     assert exists(OUTPUT_PDF)
 
+
 def test_generate_pdf_from_raw_markdown():
     """Generate a PDF from raw markdown content."""
     assert not exists(OUTPUT_PDF)
 
-    md2pdf(OUTPUT_PDF, raw='# hi there!')
+    md2pdf(OUTPUT_PDF, raw="# hi there!")
     assert exists(OUTPUT_PDF)
 
 
