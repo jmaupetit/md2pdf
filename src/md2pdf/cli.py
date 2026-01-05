@@ -1,4 +1,5 @@
 """md2pdf CLI."""
+
 import logging
 from importlib.metadata import version
 from pathlib import Path

@@ -1,4 +1,5 @@
 """md2pdf tests defaults."""
+
 from pathlib import Path
 
 # Test files paths

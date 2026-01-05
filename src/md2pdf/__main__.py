@@ -5,6 +5,7 @@ Usage: md2pdf [options] INPUT.MD OUTPUT.PDF
 Options:
     --css=STYLE.CSS
 """
+
 from . import cli
 
 if __name__ == "__main__":
