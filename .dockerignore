@@ -1,0 +1,17 @@
+# Docker stuff
+Dockerfile
+Dockerfile.*
+.dockerignore
+
+# Git stuff
+.git
+.github
+.gitignore
+
+# Python stuff
+.coverage
+.mypy_cache
+.pytest_cache
+.python-version
+.ruff_cache
+.venv

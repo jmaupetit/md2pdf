@@ -1,8 +1,8 @@
 # -- General
 SHELL := /bin/bash
 
-POETRY     = poetry
-POETRY_RUN = $(POETRY) run
+UV     = uv
+UV_RUN = $(UV) run
 
 # ==============================================================================
 # RULES
@@ -10,36 +10,47 @@ POETRY_RUN = $(POETRY) run
 default: help
 
 bootstrap: ## boostrap the project to start hacking
-bootstrap: install
+bootstrap: \
+  build
 .PHONY: bootstrap
 
-build: ## build python package
-	$(POETRY) build
+build: ## install project with its dependencies
+	$(UV) sync --locked --all-extras --dev
 .PHONY: build
 
 build-docker: ## build Docker image
-	docker build . --target production -t md2pdf:latest
+	docker build . --target production --tag jmaupetit/md2pdf:latest
 .PHONY: build-docker
 
-install: ## install project with its dependencies
-	$(POETRY_RUN) install
-.PHONY: install
-
-lint: ## lint python sources
-	$(POETRY_RUN) ruff md2pdf
+lint: ## lint all sources
+lint: \
+	lint-black \
+	lint-ruff \
+  lint-mypy
 .PHONY: lint
 
-lint-fix: ## fix lint errors
-	$(POETRY_RUN) ruff --fix md2pdf
-.PHONY: lint-fix
+lint-black: ## lint python sources with black
+	@echo 'lint:black started…'
+	uv run black src/md2pdf tests
+.PHONY: lint-black
 
-publish: ## publish a new package release
-publish: build
-	$(POETRY) publish
-.PHONY: publish
+lint-black-check: ## check python sources with black
+	@echo 'lint:black check started…'
+	uv run black --check src/md2pdf tests
+.PHONY: lint-black-check
+
+lint-ruff: ## lint python sources with ruff
+	@echo 'lint:ruff started…'
+	uv run ruff check src/md2pdf tests
+.PHONY: lint-ruff
+
+lint-ruff-fix: ## lint and fix python sources with ruff
+	@echo 'lint:ruff-fix started…'
+	uv run ruff check --fix src/md2pdf tests
+.PHONY: lint-ruff-fix
 
 test: ## run the test suite
-	$(POETRY_RUN) pytest
+	$(UV_RUN) pytest
 .PHONY: test
 
 # -- Misc
