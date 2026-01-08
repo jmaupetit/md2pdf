@@ -8,14 +8,15 @@ Convert Markdown files to PDF with styles.
 
 ## Installation
 
-The easiest way to go is to use pip:
+The easiest way to test `md2pdf` is to use `uv`:
 
 ```bash
-$ pip install md2pdf
+$ uv tool install md2pdf
 ```
 
-_Nota bene:_ ensure, Weasyprint is fully functional before using md2pdf. You will find
-installation instructions in the project documentation: [https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#installation](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#installation)
+_Nota bene:_ ensure, Weasyprint is fully functional before using md2pdf. You
+will find installation instructions in the project documentation:
+[https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#installation](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#installation)
 
 ## Usage
 
@@ -45,7 +46,8 @@ Optionally, you may load an external style:
 $ md2pdf --css tests/assets/input.css README.md README.pdf
 ```
 
-And/or activate [markdown extras](https://github.com/trentm/python-markdown2/wiki/Extras):
+And/or activate [markdown
+extras](https://github.com/trentm/python-markdown2/wiki/Extras):
 
 ```bash
 $ md2pdf --css pygments.css -e fenced-code-blocks README.md README.pdf
@@ -54,7 +56,8 @@ $ md2pdf --css pygments.css -e fenced-code-blocks README.md README.pdf
 
 ### As a library
 
-You can use `md2pdf` in your python code, like:
+If you have added `md2pdf` as a dependency for your python project, you can use
+`md2pdf` in your code, like:
 
 ```python
 from md2pdf.core import md2pdf
@@ -75,7 +78,9 @@ Function arguments:
 * `md`: input markdown file path
 * `css`: input styles path (CSS)
 * `base_url`: absolute base path for markdown linked content (as images)
-* `extras`: [markdown extras](https://github.com/trentm/python-markdown2/wiki/Extras) that should be activated
+* `extras`: [markdown
+  extras](https://github.com/trentm/python-markdown2/wiki/Extras) that should
+  be activated
 
 ### With Docker
 
@@ -106,39 +111,32 @@ Clone this project first:
 $ git clone git@github.com:jmaupetit/md2pdf.git
 ```
 
-Install md2pdf along with its dependencies (using [Poetry](https://python-poetry.org)):
+Install md2pdf along with its dependencies (using
+[uv](https://docs.astral.sh/uv/)):
 
 ```bash
 $ cd md2pdf
-$ poetry install
+$ make bootstrap
 ```
 
 ### Running the test suite
 
-To run the test suite with your active python version (virtual environment):
+To run the test suite:
 
 ```bash
-$ poetry run pytest
+$ make test
 ```
 
 Lint the code via:
 
 ```bash
-$ poetry run ruff md2pdf
-```
-
-### Release a new version
-
-Upload a new release to PyPI:
-
-```
-$ poetry build
-$ poetry publish
+$ make lint
 ```
 
 ### Ease your life
 
-If you are familiar with GNU Make, we also automate daily tasks using this lovely tool:
+If you are familiar with GNU Make, we also automate daily tasks using this
+lovely tool:
 
 ```bash
 $ make help
