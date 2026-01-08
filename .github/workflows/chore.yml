@@ -1,0 +1,42 @@
+name: Chore checks
+
+on:
+  push:
+    branches-ignore: ["main"]
+  pull_request:
+    branches-ignore: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  fixup-commits:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        with:
+          fetch-depth: 0
+      - name: Check absence of fixup commits
+        run: |
+          ! git log --pretty=format:%s | grep 'fixup!'
+
+  check-changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        with:
+          fetch-depth: 0
+      - name: Check that a CHANGELOG has been modified in the current branch
+        run: |
+          git diff --name-only origin/main | grep CHANGELOG
+
+  lint-changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - name: Check CHANGELOG max line length
+        run: |
+          test $(cat CHANGELOG.md | grep -Ev "^\[.*\]: https://github.com/jmaupetit/data7" | wc -L) -le 80
