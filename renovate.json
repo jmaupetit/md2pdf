@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":preserveSemverRanges",
+    "helpers:pinGitHubActionDigests"
+  ],
+  "commitBodyTable": true,
+  "commitMessageAction": "upgrade",
+  "commitMessagePrefix": "⬆️(project)",
+  "commitMessageTopic": "{{depName}}",
+  "labels": [
+    "dependencies"
+  ],
+  "packageRules": [
+    {
+      "groupName": "python dependencies",
+      "minimumReleaseAge": "7 days",
+      "matchManagers": [
+        "pep621"
+      ],
+      "schedule": [
+        "before 7am on monday"
+      ],
+      "matchPackageNames": [
+        "*"
+      ]
+    },
+    {
+      "matchDepTypes": ["requires-python"],
+      "enabled": false
+    }
+  ],
+  "prConcurrentLimit": 2,
+  "prHourlyLimit": 2,
+  "prCreation": "immediate",
+  "semanticCommits": "disabled",
+  "separateMajorMinor": false,
+  "updateNotScheduled": true,
+  "rebaseWhen": "behind-base-branch",
+  "recreateWhen": "never"
+}
