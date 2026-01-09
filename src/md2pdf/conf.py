@@ -1,6 +1,6 @@
 """Configuration for md2pdf."""
 
-MARKDOWN_EXTRAS: list = [
+MARKDOWN_BASE_EXTENSIONS: list = [
     "markdown.extensions.tables",
     "pymdownx.magiclink",
     "pymdownx.betterem",
