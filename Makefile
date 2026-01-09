@@ -18,9 +18,20 @@ build: ## install project with its dependencies
 	$(UV) sync --locked --all-extras --dev
 .PHONY: build
 
-build-docker: ## build Docker image
-	docker build . --target production --tag jmaupetit/md2pdf:latest
+
+build-docker: ## build Docker images
+build-docker: \
+  build-docker-debian \
+  build-docker-alpine
 .PHONY: build-docker
+
+build-docker-debian: ## build Docker (debian) image
+	docker build . --target production --tag jmaupetit/md2pdf:latest
+.PHONY: build-docker-debian
+
+build-docker-alpine: ## build Docker (alpine) image
+	docker build . -f Dockerfile.alpine --target production --tag jmaupetit/md2pdf:alpine
+.PHONY: build-docker-alpine
 
 lint: ## lint all sources
 lint: \

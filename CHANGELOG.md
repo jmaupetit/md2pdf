@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Add an Alpine Linux lightweight Docker image
+
 ### Changed
 
 - Switch to `uv` for packaging and dependency management

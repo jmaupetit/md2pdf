@@ -1,0 +1,49 @@
+# Install uv
+FROM python:3.12-alpine AS base
+
+LABEL org.opencontainers.image.authors="Julien Maupetit <julien@maupetit.net>"
+
+# Upgrade system packages to install security updates and weasyprint dependencies
+RUN apk add --no-cache \
+  so:libgobject-2.0.so.0 \
+  so:libpango-1.0.so.0 \
+  so:libharfbuzz.so.0 \
+  so:libharfbuzz-subset.so.0 \
+  so:libfontconfig.so.1 \
+  so:libpangoft2-1.0.so.0 \
+  font-liberation \
+  font-liberation-sans-narrow \
+  ttf-linux-libertine
+
+# Change the working directory to the `app` directory
+WORKDIR /app
+
+# 
+# -- BUILDER --
+# 
+FROM base AS builder
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+# Install dependencies
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --locked --no-install-project --no-editable
+
+# Copy the project into the intermediate image
+COPY . /app
+
+# Sync the project
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --locked --no-editable
+
+#
+# -- PRODUCTION --
+#
+FROM base AS production
+
+# Copy the environment, but not the source code
+COPY --from=builder --chown=app:app /app/.venv /app/.venv
+
+ENTRYPOINT ["/app/.venv/bin/md2pdf"]
