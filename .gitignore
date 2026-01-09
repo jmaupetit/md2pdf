@@ -1,3 +1,4 @@
+# Python
 *.py[cod]
 *.egg-info
 .cache
@@ -9,8 +10,12 @@
 .tox
 __pycache__/
 
+# Project
 build/
 dist/
 env/
 tests/resources/output.pdf
 venv/
+
+# Tests
+*.pdf
