@@ -22,4 +22,5 @@ def cli(md: Path, pdf: Path, css: Optional[Path], extras: list):
     """md2pdf command line tool."""
     if css is not None:
         css = Path(css)
-    md2pdf(Path(pdf), md=Path(md), css=css, base_url=Path.cwd(), extras=extras)
+
+    md2pdf(Path(pdf), md=Path(md), css=css, base_url=Path.cwd(), extras=list(extras))

@@ -55,7 +55,7 @@ PyMdown](https://facelessuser.github.io/pymdown-extensions/):
 ```bash
 $ md2pdf \
     --css examples/custom-styles-with-pygments.css \
-    --extras 'pymdownx.extra' \
+    --extras 'pymdownx.emoji' \
     README.md \
     README.pdf
 ```

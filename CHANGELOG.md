@@ -15,6 +15,7 @@ and this project adheres to
 ### Changed
 
 - Switch to `uv` for packaging and dependency management
+- Add extra extensions to the default extensions list
 
 ### Removed
 
