@@ -1,6 +1,6 @@
 [project]
 name = "md2pdf"
-version = "2.0.0b0"
+version = "2.0.0"
 description = "The Markdown to PDF conversion tool with styles"
 authors = [
   {name="Julien Maupetit", email="julien@maupetit.net"},
