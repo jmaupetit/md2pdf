@@ -1,0 +1,82 @@
+name: Publish Docker image
+
+on:
+  release:
+    types: ["published"]
+
+jobs:
+  push_to_registry:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      attestations: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Install uv and set the python version
+        uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+
+      - name: Get python package release
+        id: version
+        run: echo "version=$(uv version --color never --short)" >> "$GITHUB_OUTPUT"
+
+      - name: Check package version used as tag 
+        run: echo ${{ steps.version.outputs.version }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: jmaupetit/md2pdf
+          tags: ${{ steps.version.outputs.version }}
+
+      - name: Build and push Docker Debian image
+        id: push-debian
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            jmaupetit/md2pdf:latest 
+            jmaupetit/md2pdf:${{ steps.version.outputs.version }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push Docker Alpine image
+        id: push-alpine
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./Dockerfile.alpine
+          push: true
+          tags: |
+            jmaupetit/md2pdf:alpine
+            jmaupetit/md2pdf:${{ steps.version.outputs.version }}-alpine
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Generate artifact attestation (Debian)
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-name: index.docker.io/jmaupetit/md2pdf
+          subject-digest: ${{ steps.push-debian.outputs.digest }}
+          push-to-registry: true
+
+      - name: Generate artifact attestation (Alpine)
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-name: index.docker.io/jmaupetit/md2pdf
+          subject-digest: ${{ steps.push-alpine.outputs.digest }}
+          push-to-registry: true
