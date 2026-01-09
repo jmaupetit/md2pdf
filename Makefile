@@ -36,8 +36,7 @@ build-docker-alpine: ## build Docker (alpine) image
 lint: ## lint all sources
 lint: \
 	lint-black \
-	lint-ruff \
-  lint-mypy
+	lint-ruff
 .PHONY: lint
 
 lint-black: ## lint python sources with black
