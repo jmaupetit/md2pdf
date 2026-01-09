@@ -76,19 +76,21 @@ md2pdf(pdf,
        css=None,
        base_url=None,
        extras=[],
+       context={"foo": 1}
 )
 ```
 
 Function arguments:
 
 * `pdf`: output PDF file path
-* `raw`: input markdown raw string content
-* `md`: input markdown file path
+* `raw`: input markdown raw string content (can contain Jinja instructions)
+* `md`: input markdown file path (can contain Jinja instructions)
 * `css`: input styles path (CSS)
 * `base_url`: absolute base path for markdown linked content (as images)
-* `extras`: [markdown
-  extras](https://github.com/trentm/python-markdown2/wiki/Extras) that should
-  be activated
+* `extras`: [markdown extra
+   extensions](https://python-markdown.github.io/extensions/) that should be
+   activated
+* `context`: variables to inject to rendered Jinja template
 
 ### With Docker
 
@@ -107,6 +109,44 @@ $ docker run --rm \
     -v $PWD:/app \
     -u "$(id -u):$(id -g)" \
     jmaupetit/md2pdf --css styles.css INPUT.MD OUTPUT.PDF
+```
+
+### Use Jinja templates as input
+
+Your input markdown file or raw content can include
+[Jinja](https://jinja.palletsprojects.com/en/stable/) template tags, and
+context can be given in a frontmatter header:
+
+```md
+---
+groceries:
+  - name: apple
+    quantity: 4 
+  - name: orange 
+    quantity: 10
+  - name: banana 
+    quantity: 6
+---
+
+# Groceries
+
+| Item | Quantity |
+| ---- | -------- |
+{% for item in groceries -%}
+| {{ item.name }} | {{ item.quantity }} |
+{% endfor %}
+
+```
+
+Or directly as a `md2pdf` argument (see library usage).
+
+You can test this example using:
+
+```bash
+$ md2pdf \
+    --css examples/gutenberg-modern.min.css \
+    examples/my-music.md.j2 \
+    examples/my-music.pdf
 ```
 
 ## Contributing

@@ -22,6 +22,7 @@ def md2pdf(
     css: Optional[Path] = None,
     base_url: Optional[Path] = None,
     extras: Optional[List[str]] = None,
+    context: Optional[dict] = None,
 ):
     """Converts input markdown to styled HTML and renders it to a PDF file.
 
@@ -32,6 +33,7 @@ def md2pdf(
         css: input styles path (CSS).
         base_url: absolute base path for markdown linked content (as images).
         extras: supplementary markdown extensions to activate
+        context: input context to use for jinja template rendering
 
     Returns:
         None
@@ -39,26 +41,31 @@ def md2pdf(
     Raises:
         ValidationError: if md_content and md_file_path are empty.
     """
+    context = context if context else {}
+
     # Merge base extensions with extras extensions
     extras = extras if extras and len(extras) else []
+
     if md:
         logger.debug("Reading markdown content from file %s", md)
         raw = md.read_text()
 
     if raw is None or not len(raw):
-        raise ValidationError("Input markdown seems empty")
+        raise ValidationError(
+            "No markdown content to process (empty file or raw string)"
+        )
 
-    context: dict = {}
     # Check if markdown file is a template
     if frontmatter.checks(raw):
         logger.info("Markdown input file contains frontmatter header")
 
         # Get context and the template
-        context, template = frontmatter.parse(raw)
+        ftmt_context, raw = frontmatter.parse(raw)
         logger.debug("Frontmatter context %s", context)
+        context.update(ftmt_context)
 
-        # Render the template
-        raw = Template(template).render(context)
+    # Render the template
+    raw = Template(raw).render(context)
 
     extensions = MARKDOWN_BASE_EXTENSIONS + extras
     raw_html = markdown(raw, extensions=extensions)

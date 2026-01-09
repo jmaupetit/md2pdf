@@ -1,0 +1,100 @@
+---
+albums:
+  - id: '792320571'
+    title: Hail to the Thief (Live Recordings 2003-2009)
+    artist: Radiohead
+    released: '2025-08-13'
+  - id: '265569082'
+    title: KID A MNESIA
+    artist: Radiohead
+    released: '2021-11-05'
+  - id: '43197211'
+    title: OK Computer OKNOTOK 1997 2017
+    artist: Radiohead
+    released: '2017-06-23'
+  - id: '14880561'
+    title: In Rainbows (Disk 2)
+    artist: Radiohead
+    released: '2016-10-14'
+  - id: '14879823'
+    title: A Moon Shaped Pool
+    artist: Radiohead
+    released: '2016-05-09'
+  - id: '14880501'
+    title: TKOL RMX 1234567
+    artist: Radiohead
+    released: '2011-10-10'
+  - id: '14880315'
+    title: The King Of Limbs
+    artist: Radiohead
+    released: '2011-02-18'
+  - id: '14880659'
+    title: In Rainbows
+    artist: Radiohead
+    released: '2007-12-28'
+  - id: '14879789'
+    title: 'Com Lag: 2+2=5'
+    artist: Radiohead
+    released: '2004-03-24'
+  - id: '14879739'
+    title: Hail To the Thief
+    artist: Radiohead
+    released: '2003-06-09'
+  - id: '14879753'
+    title: I Might Be Wrong
+    artist: Radiohead
+    released: '2001-11-12'
+  - id: '14879749'
+    title: Amnesiac
+    artist: Radiohead
+    released: '2001-03-12'
+  - id: '14880741'
+    title: Kid A
+    artist: Radiohead
+    released: '2000-10-02'
+  - id: '14879797'
+    title: Karma Police
+    artist: Radiohead
+    released: '1997-08-25'
+  - id: '14879699'
+    title: OK Computer
+    artist: Radiohead
+    released: '1997-06-17'
+  - id: '14880317'
+    title: The Bends
+    artist: Radiohead
+    released: '1995-03-13'
+  - id: '14880813'
+    title: My Iron Lung
+    artist: Radiohead
+    released: '1994-09-26'
+  - id: '14880711'
+    title: Pablo Honey
+    artist: Radiohead
+    released: '1993-02-22'
+  - id: '423524437'
+    title: Creep EP
+    artist: Radiohead
+    released: '1992-09-21'
+  - id: '121893052'
+    title: Drill EP
+    artist: Radiohead
+    released: '1992-05-05'
+
+---
+
+# My Music
+
+## Radiohead
+
+Best band ever.
+
+### Albums 
+
+Because I hate to write markdown tables. Let's use a jinja template!
+
+| ID | Artist | Album | Release date |
+| -- | ------ | ----- | ------------ |
+{% for album in albums -%}
+| {{ album.id }} | {{ album.artist }} | {{ album.title }} | {{ album.released }} |
+{% endfor %}

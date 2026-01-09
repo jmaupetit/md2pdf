@@ -11,6 +11,7 @@ and this project adheres to
 ### Added
 
 - Add an Alpine Linux lightweight Docker image
+- Consider every input markdown source as a Jinja template
 
 ### Changed
 
