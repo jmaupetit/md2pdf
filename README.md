@@ -43,16 +43,24 @@ $ md2pdf README.md README.pdf
 Optionally, you may load an external style:
 
 ```bash
-$ md2pdf --css tests/assets/input.css README.md README.pdf
+$ md2pdf \
+    --css examples/custom-styles.css \
+    README.md \
+    README.pdf
 ```
 
-And/or activate [markdown
-extras](https://github.com/trentm/python-markdown2/wiki/Extras):
+And activate [markdown extensions from
+PyMdown](https://facelessuser.github.io/pymdown-extensions/):
 
 ```bash
-$ md2pdf --css pygments.css -e fenced-code-blocks README.md README.pdf
+$ md2pdf \
+    --css examples/custom-styles-with-pygments.css \
+    --extras 'pymdownx.extra' \
+    README.md \
+    README.pdf
 ```
 
+> Code blocks should be properly rendered when this extension is active.
 
 ### As a library
 
