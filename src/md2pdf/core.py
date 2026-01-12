@@ -22,6 +22,7 @@ def md2pdf(
     css: Optional[Path] = None,
     base_url: Optional[Path] = None,
     extras: Optional[List[str]] = None,
+    extras_config: Optional[dict] = None,
     context: Optional[dict] = None,
 ):
     """Converts input markdown to styled HTML and renders it to a PDF file.
@@ -33,6 +34,7 @@ def md2pdf(
         css: input styles path (CSS).
         base_url: absolute base path for markdown linked content (as images).
         extras: supplementary markdown extensions to activate
+        extras_config: a configuration dictionnary for active markdown extensions
         context: input context to use for jinja template rendering
 
     Returns:
@@ -42,6 +44,7 @@ def md2pdf(
         ValidationError: if md_content and md_file_path are empty.
     """
     context = context if context else {}
+    extras_config = extras_config if extras_config else {}
 
     # Merge base extensions with extras extensions
     extras = extras if extras and len(extras) else []
@@ -68,7 +71,7 @@ def md2pdf(
     raw = Template(raw).render(context)
 
     extensions = MARKDOWN_BASE_EXTENSIONS + extras
-    raw_html = markdown(raw, extensions=extensions)
+    raw_html = markdown(raw, extensions=extensions, extension_configs=extras_config)
 
     # Weasyprint HTML object
     if base_url is None:
