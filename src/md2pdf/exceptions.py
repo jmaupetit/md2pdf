@@ -3,5 +3,3 @@
 
 class ValidationError(Exception):
     """md2pdf validation error."""
-
-    ...

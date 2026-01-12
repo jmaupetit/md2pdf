@@ -36,7 +36,8 @@ build-docker-alpine: ## build Docker (alpine) image
 lint: ## lint all sources
 lint: \
 	lint-black \
-	lint-ruff
+	lint-ruff \
+  lint-mypy
 .PHONY: lint
 
 lint-black: ## lint python sources with black
@@ -58,6 +59,11 @@ lint-ruff-fix: ## lint and fix python sources with ruff
 	@echo 'lint:ruff-fix started…'
 	uv run ruff check --fix src/md2pdf tests
 .PHONY: lint-ruff-fix
+
+lint-mypy: ## lint python sources with mypy
+	@echo 'lint:mypy started…'
+	uv run mypy src/md2pdf tests
+.PHONY: lint-mypy
 
 test: ## run the test suite
 	$(UV_RUN) pytest

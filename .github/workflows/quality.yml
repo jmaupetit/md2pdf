@@ -55,6 +55,8 @@ jobs:
         run: make lint-black-check
       - name: Lint with Ruff
         run: make lint-ruff
+      - name: Lint with Mypy 
+        run: make lint-mypy
 
   test:
     needs: build

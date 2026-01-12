@@ -38,9 +38,11 @@ dependencies = [
 [dependency-groups]
 dev = [
     "black>=25.12.0",
+    "mypy>=1.19.1",
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
     "ruff>=0.14.10",
+    "types-markdown>=3.10.0.20251106",
 ]
 
 [project.urls]
@@ -96,3 +98,7 @@ convention = "google"
     "S101",
     "PLR2004",  # Pylint magic-value-comparison
 ]
+
+[tool.mypy]
+files = "./**/*.py"
+ignore_missing_imports = true
