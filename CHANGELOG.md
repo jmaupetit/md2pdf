@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Allow extra markdown extensions configuration using a JSON string (CLI) or a
+  dict (API)
+
 ## [2.0.0] - 2026-01-09
 
 ### Added

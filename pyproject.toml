@@ -58,7 +58,7 @@ build-backend = "hatchling.build"
 
 # Third party packages configuration
 [tool.pytest.ini_options]
-addopts = "-vs --cov=md2pdf --cov-report term-missing"
+addopts = "-v --cov=md2pdf --cov-report term-missing"
 python_files = [
     "test_*.py",
     "tests.py",
