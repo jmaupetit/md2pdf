@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-01-12 
+
 ### Added
 
 - Allow extra markdown extensions configuration using a JSON string (CLI) or a
@@ -72,7 +74,8 @@ and this project adheres to
 
 - Add current directory as `base_url` to md2pdf script (Fix #6)
 
-[unreleased]: https://github.com/jmaupetit/md2pdf/compare/2.0.0...main
+[unreleased]: https://github.com/jmaupetit/md2pdf/compare/2.1.0...main
+[2.1.0]: https://github.com/jmaupetit/md2pdf/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/jmaupetit/md2pdf/compare/1.0.1...2.0.0
 [1.0.1]: https://github.com/jmaupetit/md2pdf/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/jmaupetit/md2pdf/compare/0.6...1.0.0
