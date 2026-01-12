@@ -39,6 +39,7 @@ dependencies = [
 dev = [
     "black>=25.12.0",
     "mypy>=1.19.1",
+    "pypdf>=6.6.0",
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
     "ruff>=0.14.10",
