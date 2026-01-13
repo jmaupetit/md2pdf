@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed 
+
+- Add dependency groups to handle project flavors (`cli` and `latex` for now)
+
 ## [2.1.0] - 2026-01-12 
 
 ### Added

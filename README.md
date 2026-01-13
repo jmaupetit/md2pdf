@@ -11,7 +11,7 @@ Convert Markdown files to PDF with styles.
 The easiest way to test `md2pdf` is to use `uv`:
 
 ```bash
-$ uv tool install md2pdf
+$ uv tool install md2pdf[cli]
 ```
 
 _Nota bene:_ ensure, Weasyprint is fully functional before using md2pdf. You

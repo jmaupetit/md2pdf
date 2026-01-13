@@ -26,13 +26,20 @@ classifiers = [
   "Topic :: Utilities",
 ]
 dependencies = [
-    "click>=8.1",
     "jinja2>=3",
     "markdown>=3.5",
     "pygments>=2.17",
     "pymdown-extensions>=10",
     "python-frontmatter>=1.1",
     "weasyprint>=60",
+]
+
+[project.optional-dependencies]
+cli = [
+    "typer>=0.21.1",
+]
+latex = [
+    "markdown-katex>=202406.1035",
 ]
 
 [dependency-groups]
