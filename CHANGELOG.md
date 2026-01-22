@@ -8,9 +8,17 @@ and this project adheres to
 
 ## [Unreleased]
 
-### Changed 
+### Added 
 
-- Add dependency groups to handle project flavors (`cli` and `latex` for now)
+- CLI: allow multiple input markdown files (converted using multiple threads)
+- CLI: add the `--workers` option to adapt parallelisation
+
+### Changed
+
+- Add dependency groups to handle project flavors (`cli` and `latex`) [BC]
+- CLI: switched to [Typer](https://typer.tiangolo.com/)
+- CLI: moved to a no-arguments command (only options) [BC]
+
 
 ## [2.1.0] - 2026-01-12 
 

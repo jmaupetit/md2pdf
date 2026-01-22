@@ -23,30 +23,40 @@ will find installation instructions in the project documentation:
 ### As a CLI
 
 ```
-Usage: md2pdf [OPTIONS] MD PDF
-
-  md2pdf command line tool.
-
-Options:
-  --css PATH
-  -e, --extras TEXT
-  --version          Show the version and exit.
-  --help             Show this message and exit.
+ Usage: md2pdf [OPTIONS]                                                                              
+                                                                                                      
+ Markdown to PDF conversion tool with styles… and templates!                                          
+                                                                                                      
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────╮
+│ --input               -i      PATH     Markdown source file path (can be used multiple times).     │
+│ --output              -o      PATH     PDF output file path (when a single md input is used).      │
+│ --css                 -c      PATH     Input CSS file.                                             │
+│ --extras              -e      TEXT     Extra markdown extension to activate (cam be used multiple  │
+│                                        times).                                                     │
+│ --config              -C      TEXT     Markdown extensions configuration (as a JSON string).       │
+│ --workers             -W      INTEGER  Number of parallel workers to start. [default: 4]           │
+│ --version             -V               Display program version.                                    │
+│ --install-completion                   Install completion for the current shell.                   │
+│ --show-completion                      Show completion for the current shell, to copy it or        │
+│                                        customize the installation.                                 │
+│ --help                                 Show this message and exit.                                 │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 For example, try to generate the project documentation with:
 
 ```bash
-$ md2pdf README.md README.pdf
+$ md2pdf -i README.md 
 ```
 
-Optionally, you may load an external style:
+A `README.pdf` should have been generated.
+
+Optionally, you may load an external style sheet:
 
 ```bash
 $ md2pdf \
     --css examples/custom-styles.css \
-    README.md \
-    README.pdf
+    -i README.md
 ```
 
 And activate [markdown extensions from
@@ -56,8 +66,7 @@ PyMdown](https://facelessuser.github.io/pymdown-extensions/):
 $ md2pdf \
     --css examples/custom-styles-with-pygments.css \
     --extras 'pymdownx.emoji' \
-    README.md \
-    README.pdf
+    -i README.md
 ```
 
 > Code blocks should be properly rendered when this extension is active.
@@ -108,7 +117,7 @@ Now run your image:
 $ docker run --rm \
     -v $PWD:/app \
     -u "$(id -u):$(id -g)" \
-    jmaupetit/md2pdf --css styles.css INPUT.MD OUTPUT.PDF
+    jmaupetit/md2pdf --css styles.css -i INPUT.MD -o OUTPUT.PDF
 ```
 
 ### Use Jinja templates as input
@@ -145,8 +154,8 @@ You can test this example using:
 ```bash
 $ md2pdf \
     --css examples/gutenberg-modern.min.css \
-    examples/my-music.md.j2 \
-    examples/my-music.pdf
+    -i examples/my-music.md.j2 \
+    -o examples/my-music.pdf
 ```
 
 ## Contributing

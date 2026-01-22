@@ -39,4 +39,4 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - name: Check CHANGELOG max line length
         run: |
-          test $(cat CHANGELOG.md | grep -Ev "^\[.*\]: https://github.com/jmaupetit/data7" | wc -L) -le 80
+          test $(cat CHANGELOG.md | grep -Ev "^\[.*\]: https://github.com/jmaupetit/md2pdf" | wc -L) -le 80
