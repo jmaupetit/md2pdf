@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-01-22
+
 ### Added 
 
 - CLI: allow multiple input markdown files (converted using multiple threads)
@@ -19,8 +21,7 @@ and this project adheres to
 - CLI: switched to [Typer](https://typer.tiangolo.com/)
 - CLI: moved to a no-arguments command (only options) [BC]
 
-
-## [2.1.0] - 2026-01-12 
+## [2.1.0] - 2026-01-12
 
 ### Added
 
@@ -86,7 +87,8 @@ and this project adheres to
 
 - Add current directory as `base_url` to md2pdf script (Fix #6)
 
-[unreleased]: https://github.com/jmaupetit/md2pdf/compare/2.1.0...main
+[unreleased]: https://github.com/jmaupetit/md2pdf/compare/3.0.0...main
+[3.0.0]: https://github.com/jmaupetit/md2pdf/compare/2.1.0...3.0.0
 [2.1.0]: https://github.com/jmaupetit/md2pdf/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/jmaupetit/md2pdf/compare/1.0.1...2.0.0
 [1.0.1]: https://github.com/jmaupetit/md2pdf/compare/1.0.0...1.0.1
