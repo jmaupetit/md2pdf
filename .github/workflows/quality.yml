@@ -80,4 +80,6 @@ jobs:
       - name: Initialize the project for testing
         run: make bootstrap
       - name: Test with pytest
+        env:
+          TERM: dumb
         run: make test
