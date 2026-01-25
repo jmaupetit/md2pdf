@@ -37,6 +37,7 @@ dependencies = [
 [project.optional-dependencies]
 cli = [
     "typer>=0.21.1",
+    "watchfiles>=1.1.1",
 ]
 latex = [
     "markdown-katex>=202406.1035",
