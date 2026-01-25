@@ -52,6 +52,7 @@ dev = [
     "pytest-cov>=7.0.0",
     "ruff>=0.14.10",
     "types-markdown>=3.10.0.20251106",
+    "zensical>=0.0.17",
 ]
 
 [project.urls]

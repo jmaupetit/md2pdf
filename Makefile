@@ -33,6 +33,14 @@ build-docker-alpine: ## build Docker (alpine) image
 	docker build . -f Dockerfile.alpine --target production --tag jmaupetit/md2pdf:alpine
 .PHONY: build-docker-alpine
 
+docs: ## build documentation
+	uv run zensical build
+.PHONY: docs
+
+docs-serve: ## run documentation server
+	uv run zensical serve
+.PHONY: docs-serve
+
 lint: ## lint all sources
 lint: \
 	lint-black \
