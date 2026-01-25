@@ -6,3 +6,6 @@ MARKDOWN_BASE_EXTENSIONS: list = [
     "pymdownx.betterem",
     "pymdownx.superfences",
 ]
+
+# FIXME: shouldn't be required for Linux
+CLI_WATCH_FORCE_POOLING = True

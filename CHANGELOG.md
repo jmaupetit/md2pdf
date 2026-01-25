@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added 
+
+- CLI: add `--watch` option
+
 ### Fixed
 
 - Docker: fix fontconfig warning message by settings `/tmp` as home directory
