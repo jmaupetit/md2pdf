@@ -103,22 +103,26 @@ Function arguments:
 
 ### With Docker
 
-Install [Docker](https://www.docker.com/)
-
-Pull the image:
+Considering [docker](https://www.docker.com/) is installed, pull the latest
+Debian-based image:
 
 ```bash
-$ docker pull jmaupetit/md2pdf
+$ docker pull jmaupetit/md2pdf:latest
 ```
 
-Now run your image:
+And try to run a smoke test with this image:
 
 ```bash
-$ docker run --rm \
-    -v $PWD:/app \
+$ docker run --rm -t \
+    -v $PWD:/wrk \
     -u "$(id -u):$(id -g)" \
-    jmaupetit/md2pdf --css styles.css -i INPUT.MD -o OUTPUT.PDF
+    -w /wrk \
+    jmaupetit/md2pdf:latest -i README.md
 ```
+
+> There is also a smaller Alpine-based image tagged `alpine`. For a full list
+> of available tags, check the project's [DockerHub
+> repository](https://hub.docker.com/r/jmaupetit/md2pdf/tags).
 
 ### Use Jinja templates as input
 

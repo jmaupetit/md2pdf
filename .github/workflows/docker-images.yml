@@ -16,5 +16,21 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - name: Build Docker (debian) image
         run: make build-docker-debian
+      - name: Test (debian) image 
+        run: |
+          docker run --rm \
+            -u "$(id -u):$(id -g)" \
+            -v $PWD:/wrk \
+            -w /wrk \
+            jmaupetit/md2pdf:latest -i README.md && \
+          ls README.pdf
       - name: Build Docker (alpine) image
         run: make build-docker-alpine
+      - name: Test (alpine) image 
+        run: |
+          docker run --rm \
+            -u "$(id -u):$(id -g)" \
+            -v $PWD:/wrk \
+            -w /wrk \
+            jmaupetit/md2pdf:alpine -i README.md && \
+          ls README.pdf

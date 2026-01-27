@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed 
+
+- Docker: add missing extra dependencies
+
 ## [3.0.0] - 2026-01-22
 
 ### Added 

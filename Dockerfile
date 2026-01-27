@@ -34,7 +34,7 @@ COPY . /app
 
 # Sync the project
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --locked --no-editable
+    uv sync --extra cli --extra latex --locked --no-editable
 
 #
 # -- PRODUCTION --
