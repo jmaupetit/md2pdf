@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
+- Docker: fix fontconfig warning message by settings `/tmp` as home directory
+
 ## [3.0.1] - 2026-01-27
 
 ### Fixed 

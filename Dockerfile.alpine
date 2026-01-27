@@ -43,6 +43,9 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 #
 FROM base AS production
 
+# Use a temporary home directory (with write permissions)
+ENV HOME=/tmp
+
 # Copy the environment, but not the source code
 COPY --from=builder --chown=app:app /app/.venv /app/.venv
 
