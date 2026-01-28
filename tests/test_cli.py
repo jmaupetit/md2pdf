@@ -2,6 +2,11 @@
 
 import json
 from importlib import metadata
+from pathlib import Path
+from tempfile import NamedTemporaryFile
+from threading import Thread
+from time import sleep
+from unittest import mock
 
 import pytest
 
@@ -118,6 +123,28 @@ def test_generate_pdf_from_markdown_source_file_without_output(cli_runner):
     assert DEFAULT_OUTPUT_PDF.exists()
 
 
+def test_generate_pdf_from_multiple_markdown_source_files(cli_runner):
+    """Generate a PDF from markdown files with no output argument."""
+    assert not DEFAULT_OUTPUT_PDF.exists()
+
+    # Extra markdown file
+    with NamedTemporaryFile(suffix=".md", delete_on_close=False) as second_md:
+        second_md.write(b"# title")
+        second_md.close()
+
+        second_pdf = Path(second_md.name).with_suffix(".pdf")
+        assert not second_pdf.exists()
+
+        result = cli_runner.invoke(cli, ["-i", str(INPUT_MD), "-i", second_md.name])
+        assert result.exit_code == 0
+
+        assert DEFAULT_OUTPUT_PDF.exists()
+        assert second_pdf.exists()
+
+    # Clean generated PDF
+    second_pdf.unlink()
+
+
 def test_generate_pdf_from_markdown_source_file_and_stylesheet(cli_runner):
     """Generate a PDF from a markdown and a CSS file."""
     assert not OUTPUT_PDF.exists()
@@ -154,3 +181,99 @@ def test_generate_pdf_with_a_configured_extension(cli_runner):
         ],
     )
     assert OUTPUT_PDF.exists()
+
+
+def test_generate_pdf_with_watch(cli_runner):
+    """Generate a PDF from a markdown file with the watch option activated."""
+    assert not OUTPUT_PDF.exists()
+
+    # Raise a KeyboardInterrupt after the first watcher changes event
+    with mock.patch("md2pdf.cli.watcher_callback", side_effect=KeyboardInterrupt):
+        bg_runner = Thread(
+            target=cli_runner.invoke,
+            daemon=True,
+            args=(
+                cli,
+                ["-i", str(INPUT_MD), "-o", str(OUTPUT_PDF), "-w"],
+            ),
+        )
+        bg_runner.start()
+
+        # Wait for the first PDF generation
+        while not OUTPUT_PDF.exists():
+            sleep(0.1)
+        original_stat = OUTPUT_PDF.stat()
+        OUTPUT_PDF.unlink()
+        assert not OUTPUT_PDF.exists()
+
+        # Changing the input markdown file should raise a changes event
+        INPUT_MD.touch()
+
+        # Wait for it
+        bg_runner.join()
+
+    # The PDF file should have been updated
+    assert OUTPUT_PDF.exists()
+    assert original_stat != OUTPUT_PDF.stat()
+
+
+def test_generate_pdf_with_watch_and_css(cli_runner):
+    """Generate a PDF from markdown files with the watch and css options activated."""
+    assert not OUTPUT_PDF.exists()
+
+    # Raise a KeyboardInterrupt after the first watcher changes event
+    with (
+        mock.patch("md2pdf.cli.watcher_callback", side_effect=KeyboardInterrupt),
+        NamedTemporaryFile(suffix=".md", delete_on_close=False) as second_md,
+    ):
+        # Add markdown content
+        second_md.write(b"# title")
+        second_md.close()
+
+        second_pdf = Path(second_md.name).with_suffix(".pdf")
+        assert not second_pdf.exists()
+
+        bg_runner = Thread(
+            target=cli_runner.invoke,
+            daemon=True,
+            args=(
+                cli,
+                [
+                    "-i",
+                    str(INPUT_MD),
+                    "-i",
+                    second_md.name,
+                    "-c",
+                    str(INPUT_CSS),
+                    "-w",
+                ],
+            ),
+        )
+        bg_runner.start()
+
+        # Wait for all PDFs generation
+        while not all((DEFAULT_OUTPUT_PDF.exists(), second_pdf.exists())):
+            sleep(0.1)
+
+        output_pdf_stat = DEFAULT_OUTPUT_PDF.stat()
+        second_pdf_stat = second_pdf.stat()
+
+        # Delete PDFs generated before starting the watcher
+        DEFAULT_OUTPUT_PDF.unlink()
+        second_pdf.unlink()
+        assert not DEFAULT_OUTPUT_PDF.exists()
+        assert not second_pdf.exists()
+
+        # Changing the input CSS file should raise a changes event and both markdown
+        # files should be rendered
+        INPUT_CSS.write_text(".bold { font-weight: bold; }")
+
+        # Wait for it
+        bg_runner.join()
+
+    # The PDF file should have been updated
+    assert DEFAULT_OUTPUT_PDF.exists()
+    assert second_pdf.exists()
+    assert output_pdf_stat != DEFAULT_OUTPUT_PDF.stat()
+    assert second_pdf_stat != second_pdf.stat()
+    second_pdf.unlink()
