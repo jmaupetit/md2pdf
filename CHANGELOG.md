@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+- CLI: add explicit message to install `cli` extra when trying to run the CLI
+  with missing dependencies
+
 ### Added 
 
 - CLI: add `--watch` option

@@ -9,7 +9,13 @@ from pathlib import Path
 from time import time
 from typing import Annotated, List, Optional
 
-import typer
+try:
+    import typer
+except ModuleNotFoundError as err:
+    raise RuntimeError(
+        "Missing dependency: to use the CLI, you should install the `cli` extra first: "
+        "`pip install md2pdf[cli]`"
+    ) from err
 from rich.console import Console
 from rich.progress import (
     Progress,
