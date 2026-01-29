@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-01-29
+
 ### Changed
 
 - CLI: add explicit message to install `cli` extra when trying to run the CLI
@@ -106,7 +108,8 @@ and this project adheres to
 
 - Add current directory as `base_url` to md2pdf script (Fix #6)
 
-[unreleased]: https://github.com/jmaupetit/md2pdf/compare/3.0.1...main
+[unreleased]: https://github.com/jmaupetit/md2pdf/compare/3.1.0...main
+[3.1.0]: https://github.com/jmaupetit/md2pdf/compare/3.0.1...3.1.0
 [3.0.1]: https://github.com/jmaupetit/md2pdf/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/jmaupetit/md2pdf/compare/2.1.0...3.0.0
 [2.1.0]: https://github.com/jmaupetit/md2pdf/compare/2.0.0...2.1.0
