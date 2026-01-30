@@ -211,11 +211,13 @@ def test_generate_pdf_with_watch(cli_runner):
         OUTPUT_PDF.unlink()
         assert not OUTPUT_PDF.exists()
 
-        # Changing the input markdown file should raise a changes event
+        # Changing the input markdown file should raise a changes event. Wait a bit
+        # before triggering the change.
+        sleep(1)
         INPUT_MD.touch()
 
         # Wait for it
-        bg_runner.join(timeout=10)
+        bg_runner.join(timeout=60)
 
     # The PDF file should have been updated
     assert OUTPUT_PDF.exists()
@@ -273,11 +275,13 @@ def test_generate_pdf_with_watch_and_css(cli_runner):
         assert not second_pdf.exists()
 
         # Changing the input CSS file should raise a changes event and both markdown
-        # files should be rendered
+        # files should be rendered. Wait a bit for the watcher to start before
+        # performing changes.
+        sleep(1)
         INPUT_CSS.touch()
 
         # Wait for it
-        bg_runner.join(timeout=10)
+        bg_runner.join(timeout=60)
 
         # Manual cleanup
         Path(second_md.name).unlink()
