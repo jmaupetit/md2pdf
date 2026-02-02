@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Add input template support in the library
+
 ### Changed 
 
 - CLI: raise an error when thread-rendering fails
