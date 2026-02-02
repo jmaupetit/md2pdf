@@ -88,7 +88,7 @@ def _start_threads(
                 task = progress.add_task(
                     "convert", md=md_, pdf=pdf_, total=1, start=False
                 )
-                pool.submit(
+                future = pool.submit(
                     _run_with_progress,
                     progress,
                     task,
@@ -98,12 +98,14 @@ def _start_threads(
                     extras,
                     extras_config,
                 )
-                tasks.append(task)
+                tasks.append((task, future))
 
     console.print(f"🚀 Output files generated in [blue]{(time() - started_at):.3f}s[/]")
 
-    # Clean tasks
-    for task in tasks:
+    # Check tasks execution and remove them if they succeeded
+    for task, future in tasks:
+        if future.exception() is not None:
+            raise future.exception()
         progress.remove_task(task)
 
 
