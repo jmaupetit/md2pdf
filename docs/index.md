@@ -22,7 +22,7 @@ PDF files. It's key features are:
 
     ```` md title="idea.md"
     --8<-- "docs/snippets/idea.md"
-    `````
+    ````
 
 === "PDF"
 

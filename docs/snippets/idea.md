@@ -1,18 +1,39 @@
-# Lorem ipsum
+---
+pdf:
+    title: md2pdf idea
+---
 
-In [publishing](https://www.wikiwand.com/en/Publishing) and [graphic design](https://www.wikiwand.com/en/Graphic_design), **lorem ipsum** (derived from Latin *dolorem ipsum*, translated as "pain itself") is a [filler text](https://www.wikiwand.com/en/Filler_text) commonly used to demonstrate the graphic elements of a document or visual presentation. [^1]
+# `md2pdf` idea :bulb:
 
-## Example text
+In [publishing](https://www.wikiwand.com/en/Publishing) and [graphic
+design](https://www.wikiwand.com/en/Graphic_design), **lorem ipsum** (derived
+from Latin *dolorem ipsum*, translated as "pain itself") is a [filler
+text](https://www.wikiwand.com/en/Filler_text) commonly used to demonstrate the
+graphic elements of a document or visual presentation. [^1]
+
+## Text
 
 A common form of *lorem ipsum* reads:
 
-> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+> tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+> quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+> consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+> cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+> proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ----
 
-# $`\LaTeX`$ example
+Inline styles support **strong**, *Emphasis*, `code`, <u>underline</u>,
+~~strikethrough~~, emojis (*e.g.* `:rocket:` rendered as :rocket:), $`\LaTeX`$,
+X^2^, H~2~O, ==highlight==, [Link](typora.io).
 
-## Formula
+## Images
+
+<!--![md2pdf logo](https://github.com/jmaupetit/md2pdf/raw/main/assets/md2pdf-logo.png) --> 
+
+
+## $`\LaTeX`$ formulas
 
 ```math
 f(x) = \int_{-\infty}^\infty
@@ -20,20 +41,7 @@ f(x) = \int_{-\infty}^\infty
     \,d\xi
 ```
 
-
-Inline styles support **strong**, *Emphasis*, `code`, <u>underline</u>, ~~strikethrough~~, :rocket:, $`\LaTeX`$, X^2^, H~2~O, ==highlight==, [Link](typora.io), and image:
-
-![img](https://i.imgur.com/RGLj3oV.jpg)
-
-Block level contains:
-
-### Heading 3
-
-#### Heading 4
-
-##### Heading 5
-
-###### Heading 6
+## Tables
 
 | Left-Aligned  | Center Aligned  | Right Aligned |
 | :------------ | :-------------: | ------------: |
@@ -41,12 +49,18 @@ Block level contains:
 | col 2 is      |    centered     |           $12 |
 | zebra stripes |    are neat     |            $1 |
 
+
+## Lists
+
 1. ordered list item 1.
 2. ordered list item 2.
    + sub-unordered list item 1.
    + sub-unordered list item 2.
      + [x] something is DONE.
      + [ ] something is not TODO.
+
+
+## Code
 
 ```python
 def parse_config(config: str) -> dict:
