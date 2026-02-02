@@ -1,6 +1,15 @@
 # -- General
 SHELL := /bin/bash
 
+# Docs 
+DOCS_SNIPPETS_PATH = ./docs/snippets
+DOCS_SNIPPETS_MD   = $(wildcard $(DOCS_SNIPPETS_PATH)/*.md)
+DOCS_SNIPPETS_PDF  = $(patsubst %.md,%.pdf,$(DOCS_SNIPPETS_MD))
+
+# Assets
+MD2PDF_CSS = ./examples/md2pdf.css
+
+# Tools
 UV     = uv
 UV_RUN = $(UV) run
 
@@ -8,6 +17,10 @@ UV_RUN = $(UV) run
 # RULES
 
 default: help
+
+$(DOCS_SNIPPETS_PATH)/%.pdf: $(DOCS_SNIPPETS_PATH)/%.md
+	@echo -e "---\n📼 $< → $@"
+	uv run md2pdf -i $< -o $@ -c $(MD2PDF_CSS)
 
 bootstrap: ## boostrap the project to start hacking
 bootstrap: \
@@ -17,7 +30,6 @@ bootstrap: \
 build: ## install project with its dependencies
 	$(UV) sync --locked --all-extras --dev
 .PHONY: build
-
 
 build-docker: ## build Docker images
 build-docker: \
@@ -34,8 +46,22 @@ build-docker-alpine: ## build Docker (alpine) image
 .PHONY: build-docker-alpine
 
 docs: ## build documentation
-	uv run zensical build
+docs: docs-snippets
+	uv run zensical build -c
 .PHONY: docs
+
+docs-snippets: ## build documentation snippets
+docs-snippets: \
+  $(DOCS_SNIPPETS_PDF) \
+  $(MD2PDF_CSS)
+	@echo "✅ Documentation snippets rendered"
+.PHONY: docs-snippets
+
+docs-snippets-watch: ## work on docs snippets and styles (watch mode)
+	echo $(DOCS_SNIPPETS_MD) | \
+		xargs printf -- '-i %s ' | \
+		xargs uv run md2pdf -c $(MD2PDF_CSS) -w
+.PHONY: docs-snippets-watch
 
 docs-serve: ## run documentation server
 	uv run zensical serve
