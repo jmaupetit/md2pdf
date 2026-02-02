@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed 
+
+- CLI: raise an error when thread-rendering fails
+
 ## [3.1.0] - 2026-01-29
 
 ### Changed

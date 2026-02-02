@@ -124,7 +124,7 @@ def test_generate_pdf_from_markdown_source_file_without_output(cli_runner):
 
 
 def test_generate_pdf_from_multiple_markdown_source_files(cli_runner):
-    """Generate a PDF from markdown files with no output argument."""
+    """Generate PDFs from markdown files with no output argument."""
     assert not DEFAULT_OUTPUT_PDF.exists()
 
     # Extra markdown file
@@ -148,6 +148,36 @@ def test_generate_pdf_from_multiple_markdown_source_files(cli_runner):
 
     # Clean generated PDF and temporary file
     second_pdf.unlink()
+
+
+def test_generate_pdf_fail_from_multiple_markdown_source_files(cli_runner):
+    """Generate PDFs from markdown files with a single failure."""
+    assert not DEFAULT_OUTPUT_PDF.exists()
+
+    # Extra markdown file
+    #
+    # Should be manually deleted for python < 3.12 compatibility
+    with (
+        NamedTemporaryFile(suffix=".md", delete=False) as second_md,
+        mock.patch(
+            "md2pdf.cli._run_with_progress", side_effect=ValidationError
+        ) as mocked_md2pdf,
+    ):
+        second_md.write(b"# title")
+        second_md.close()
+
+        second_pdf = Path(second_md.name).with_suffix(".pdf")
+        assert not second_pdf.exists()
+
+        result = cli_runner.invoke(cli, ["-i", str(INPUT_MD), "-i", second_md.name])
+        assert result.exit_code == 1
+
+        assert not DEFAULT_OUTPUT_PDF.exists()
+        assert not second_pdf.exists()
+
+        # Manual cleanup
+        Path(second_md.name).unlink()
+        assert mocked_md2pdf.call_count == 2
 
 
 def test_generate_pdf_from_markdown_source_file_and_stylesheet(cli_runner):
