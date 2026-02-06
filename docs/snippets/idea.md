@@ -30,10 +30,9 @@ X^2^, H~2~O, ==highlight==, [Link](typora.io).
 
 ## Images
 
-<!--![md2pdf logo](https://github.com/jmaupetit/md2pdf/raw/main/assets/md2pdf-logo.png) --> 
+![xkcd standards](https://imgs.xkcd.com/comics/standards.png)
 
-
-## $`\LaTeX`$ formulas
+## LaTeX formulas
 
 ```math
 f(x) = \int_{-\infty}^\infty
@@ -45,19 +44,19 @@ f(x) = \int_{-\infty}^\infty
 
 | Left-Aligned  | Center Aligned  | Right Aligned |
 | :------------ | :-------------: | ------------: |
-| col 3 is      | some wordy text |         $1600 |
-| col 2 is      |    centered     |           $12 |
-| zebra stripes |    are neat     |            $1 |
+| left aligned  | some wordy text |         $1600 |
+| zebra stripes |    centered     |           $12 |
+| are cool      |    are neat     |            $1 |
 
 
 ## Lists
 
-1. ordered list item 1.
-2. ordered list item 2.
-   + sub-unordered list item 1.
-   + sub-unordered list item 2.
-     + [x] something is DONE.
-     + [ ] something is not TODO.
+1.  ordered list item 1.
+2.  ordered list item 2.
+    - sub-unordered list item 1.
+    - sub-unordered list item 2.
+        - [x] something is DONE
+        - [ ] something is not TODO
 
 
 ## Code

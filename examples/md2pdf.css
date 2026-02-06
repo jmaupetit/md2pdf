@@ -506,9 +506,9 @@ blockquote footer {
 
 img {
   border: 0;
-  /* display: block; */
+  display: block;
   max-width: 100% !important;
-  vertical-align: middle;
+  margin: 0 auto;
 }
 
 hr {
@@ -967,6 +967,7 @@ span.linenos.special {
 /* md2pdf */
 .emojione {
   max-height: 2rem;
+  display: inline;
 }
 
 .footnote {
@@ -977,6 +978,18 @@ span.linenos.special {
 
 .footnote hr {
   margin-bottom: 1rem;
+}
+
+/* Tasks list */
+li.task-list-item {
+  list-style-type: none;
+}
+li.task-list-item > input[type="checkbox"] {
+  display: inline-block;
+  vertical-align: middle;
+}
+input:checked {
+  background-color: #222 !important;
 }
 
 @page {

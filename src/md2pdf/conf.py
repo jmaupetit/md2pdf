@@ -9,10 +9,12 @@ MARKDOWN_BASE_EXTENSIONS: list = [
     "pymdownx.betterem",
     "pymdownx.caret",
     "pymdownx.emoji",
+    "pymdownx.fancylists",
     "pymdownx.magiclink",
     "pymdownx.magiclink",
     "pymdownx.mark",
     "pymdownx.superfences",
+    "pymdownx.tasklist",
     "pymdownx.tilde",
 ]
 

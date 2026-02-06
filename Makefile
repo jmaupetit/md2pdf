@@ -19,8 +19,8 @@ UV_RUN = $(UV) run
 default: help
 
 $(DOCS_SNIPPETS_PATH)/%.pdf: $(DOCS_SNIPPETS_PATH)/%.md
-	@echo -e "---\n📼 $< → $@"
-	uv run md2pdf -i $< -o $@ -c $(MD2PDF_CSS)
+	@echo -e "---\n📃 $< → $@"
+	uv run md2pdf -i $< -o $@ -c $(MD2PDF_CSS) -e "markdown_katex" -C '{"markdown_katex": {"no_inline_svg": true, "insert_fonts_css": true}}'
 
 bootstrap: ## boostrap the project to start hacking
 bootstrap: \
@@ -60,7 +60,7 @@ docs-snippets: \
 docs-snippets-watch: ## work on docs snippets and styles (watch mode)
 	echo $(DOCS_SNIPPETS_MD) | \
 		xargs printf -- '-i %s ' | \
-		xargs uv run md2pdf -c $(MD2PDF_CSS) -w
+		xargs uv run md2pdf -c $(MD2PDF_CSS) -w -c $(MD2PDF_CSS) -e "markdown_katex" -C '{"markdown_katex": {"no_inline_svg": true, "insert_fonts_css": true}}'
 .PHONY: docs-snippets-watch
 
 docs-serve: ## run documentation server
