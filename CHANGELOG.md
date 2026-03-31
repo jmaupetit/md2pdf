@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Security
+
+- Upgrade `pygments` to 2.20+
+
 ## [3.1.0] - 2026-01-29
 
 ### Changed
