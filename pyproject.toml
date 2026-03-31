@@ -28,7 +28,7 @@ classifiers = [
 dependencies = [
     "jinja2>=3",
     "markdown>=3.5",
-    "pygments>=2.17",
+    "pygments>=2.20",
     "pymdown-extensions>=10",
     "python-frontmatter>=1.1",
     "weasyprint>=60",
@@ -45,9 +45,9 @@ latex = [
 
 [dependency-groups]
 dev = [
-    "black>=25.12.0",
+    "black>=26.3.1",
     "mypy>=1.19.1",
-    "pypdf>=6.6.0",
+    "pypdf>=6.9.2",
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
     "ruff>=0.14.10",
