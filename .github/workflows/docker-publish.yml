@@ -45,7 +45,7 @@ jobs:
 
       - name: Build and push Docker Debian image
         id: push-debian
-        uses: docker/build-push-action@c5117b60bc829f00aaacb038e99de2712bee6e6e
+        uses: docker/build-push-action@ef1fb9688fc3626d0fd5e462f502cbbdc6456feb
         with:
           context: .
           file: ./Dockerfile
@@ -57,7 +57,7 @@ jobs:
 
       - name: Build and push Docker Alpine image
         id: push-alpine
-        uses: docker/build-push-action@c5117b60bc829f00aaacb038e99de2712bee6e6e
+        uses: docker/build-push-action@ef1fb9688fc3626d0fd5e462f502cbbdc6456feb
         with:
           context: .
           file: ./Dockerfile.alpine
