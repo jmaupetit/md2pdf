@@ -21,7 +21,7 @@ def test_generate_pdf_from_raw_markdown():
     """Generate a PDF from raw markdown content."""
     assert not OUTPUT_PDF.exists()
 
-    md2pdf(OUTPUT_PDF, raw="# hi there!")
+    md2pdf(pdf=OUTPUT_PDF, raw="# hi there!")
     assert OUTPUT_PDF.exists()
 
     # Content
@@ -43,7 +43,7 @@ def test_generate_pdf_with_jinja_frontmatter_input():
             "ID: {{ id }}",
         ]
     )
-    md2pdf(OUTPUT_PDF, raw=raw)
+    md2pdf(pdf=OUTPUT_PDF, raw=raw)
     assert OUTPUT_PDF.exists()
 
     # Content
@@ -97,4 +97,4 @@ def test_generate_pdf_with_jinja_frontmatter_and_context_input():
 def test_raises_a_validation_error_when_generated_html_is_empty():
     """Raise a ValidationError when generated HTML is empty."""
     with pytest.raises(ValidationError):
-        md2pdf(OUTPUT_PDF)
+        md2pdf(pdf=OUTPUT_PDF)

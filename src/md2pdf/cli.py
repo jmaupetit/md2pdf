@@ -3,7 +3,7 @@
 import json
 import logging
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime
+from datetime import datetime, timezone
 from importlib.metadata import version as metadata_version
 from pathlib import Path
 from time import time
@@ -63,7 +63,7 @@ def _run_with_progress(
         md=md_,
         css=css,
         base_url=Path.cwd(),
-        extras=extras if extras else None,
+        extras=extras or None,
         extras_config=extras_config,
     )
     progress.update(task, completed=True)
@@ -78,7 +78,7 @@ def _start_threads(
     extras: Optional[list[str]] = None,
     extras_config: Optional[dict] = None,
 ):
-    """Run convertion in threads with progress."""
+    """Run conversion in threads with progress."""
     started_at = time()
     tasks = []
     with progress:
@@ -152,7 +152,7 @@ def main(
         typer.Option(
             "--extras",
             "-e",
-            help="Extra markdown extension to activate (cam be used multiple times).",
+            help="Extra markdown extension to activate (can be used multiple times).",
         ),
     ] = None,
     config: Annotated[
@@ -182,7 +182,7 @@ def main(
         console.print(f"{metadata_version('md2pdf')}")
         raise typer.Exit()
 
-    if md is None or not len(md):
+    if md is None or not md:
         console.print("🤷‍♂️ No markdown input file. See `--help`")
         raise typer.Exit(code=2)
 
@@ -221,11 +221,12 @@ def main(
         force_polling=CLI_WATCH_FORCE_POOLING,
     ):
         changed_files = {Path(change[1]) for change in changes}
-        console.rule(str(datetime.now()), align="right")
+        console.rule(str(datetime.now(timezone.utc)), align="right")
         console.print(f"⚡️ Detected changes in: {list(map(str, changed_files))}")
-        changed_md = list(changed_files & set(md))
         if css in changed_files:
             changed_md = md
+        else:
+            changed_md = list(changed_files & set(md))
 
         _start_threads(
             _get_progress(console), workers, changed_md, pdf, css, extras, extras_config

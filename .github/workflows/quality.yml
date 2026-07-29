@@ -2,12 +2,20 @@ name: Quality
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
 
 permissions:
   contents: read
+
+x-python-matrix: &python-matrix
+  python-version:
+    - "3.10"
+    - "3.11"
+    - "3.12"
+    - "3.13"
+    - "3.14"
 
 jobs:
   build:
@@ -15,12 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: 
-          - "3.10"
-          - "3.11"
-          - "3.12"
-          - "3.13"
-          - "3.14"
+        <<: *python-matrix
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -37,12 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version:
-          - "3.10"
-          - "3.11"
-          - "3.12"
-          - "3.13"
-          - "3.14"
+        <<: *python-matrix
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -55,7 +53,7 @@ jobs:
         run: make lint-black-check
       - name: Lint with Ruff
         run: make lint-ruff
-      - name: Lint with Mypy 
+      - name: Lint with Mypy
         run: make lint-mypy
 
   test:
@@ -63,12 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version:
-          - "3.10"
-          - "3.11"
-          - "3.12"
-          - "3.13"
-          - "3.14"
+        <<: *python-matrix
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7

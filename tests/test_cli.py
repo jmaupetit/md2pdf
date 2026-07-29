@@ -18,7 +18,7 @@ from .defaults import DEFAULT_OUTPUT_PDF, INPUT_CSS, INPUT_MD, OUTPUT_PDF
 
 @pytest.mark.parametrize(
     "config",
-    (
+    [
         '{"my_extension": {"option_1": 1, "option_2": true}}',  # standard
         '{"my_extension":{"option_1":1,"option_2":true}}',  # compressed
         """
@@ -29,7 +29,7 @@ from .defaults import DEFAULT_OUTPUT_PDF, INPUT_CSS, INPUT_MD, OUTPUT_PDF
           }
         }
         """,  # formatted
-    ),
+    ],
 )
 def test_parse_config(config):
     """Test the input configuration parsing."""
@@ -39,12 +39,12 @@ def test_parse_config(config):
 
 @pytest.mark.parametrize(
     "config",
-    (
+    [
         "my_extension=value",  # simple string
         "{'my_extension': {'option_1': 1, 'option_2': true}}",  # single-quotes
         '{"my_extension": {"option_1": toto, "option_2": true}}',  # string w/o quotes
         '{"my_extension": {"option_1": 1, "option_2": true,}}',  # last row comma
-    ),
+    ],
 )
 def test_parse_config_invalid_config(config):
     """Test the input configuration parsing when an invalid configuration is parsed."""
@@ -64,7 +64,7 @@ def test_print_usage_when_no_args(cli_runner):
 
 
 def test_exit_when_no_markdown_input(cli_runner):
-    """Exit with an error message when not input markdown files are passed."""
+    """Exit with an error message when no input markdown files are passed."""
     result = cli_runner.invoke(cli, ["-o", "test.pdf"])
     expected = "No markdown input file. See `--help`"
     assert result.exit_code == 2
@@ -72,7 +72,7 @@ def test_exit_when_no_markdown_input(cli_runner):
 
 
 def test_exit_when_multiple_markdown_and_pdf_options(cli_runner):
-    """Exit with an error message when called with multitple input & output options."""
+    """Exit with an error message when called with multiple input and output options."""
     result = cli_runner.invoke(
         cli, ["-i", str(INPUT_MD), "-i", str(INPUT_MD), "-o", "test.pdf"]
     )

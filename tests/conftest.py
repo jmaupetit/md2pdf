@@ -6,7 +6,7 @@ from typer.testing import CliRunner
 from .defaults import DEFAULT_OUTPUT_PDF, OUTPUT_PDF
 
 
-@pytest.fixture(scope="function", autouse=True)
+@pytest.fixture(autouse=True)
 def remove_generated_pdf():
     """Remove test-generated PDF file."""
     yield
@@ -21,4 +21,4 @@ def remove_generated_pdf():
 @pytest.fixture
 def cli_runner():
     """CLI runner."""
-    yield CliRunner()
+    return CliRunner()

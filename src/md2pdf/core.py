@@ -34,7 +34,7 @@ def md2pdf(
         css: input styles path (CSS).
         base_url: absolute base path for markdown linked content (as images).
         extras: supplementary markdown extensions to activate
-        extras_config: a configuration dictionnary for active markdown extensions
+        extras_config: a configuration dictionary for active markdown extensions
         context: input context to use for jinja template rendering
 
     Returns:
@@ -43,17 +43,17 @@ def md2pdf(
     Raises:
         ValidationError: if md_content and md_file_path are empty.
     """
-    context = context if context else {}
-    extras_config = extras_config if extras_config else {}
+    context = context or {}
+    extras_config = extras_config or {}
 
     # Merge base extensions with extras extensions
-    extras = extras if extras and len(extras) else []
+    extras = extras or []
 
     if md:
         logger.debug("Reading markdown content from file %s", md)
         raw = md.read_text()
 
-    if raw is None or not len(raw):
+    if raw is None or not raw:
         raise ValidationError(
             "No markdown content to process (empty file or raw string)"
         )
@@ -65,7 +65,7 @@ def md2pdf(
         # Get context and the template
         ftmt_context, raw = frontmatter.parse(raw)
         logger.debug("Frontmatter context %s", context)
-        context.update(ftmt_context)
+        context |= ftmt_context
 
     # Render the template
     raw = Template(raw).render(context)
