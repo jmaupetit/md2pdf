@@ -193,6 +193,12 @@ def main(
         )
         raise typer.Exit(code=2)
 
+    if workers < 1:
+        console.print(
+            "❌ Option `[red]--workers/-W[/red]` must be a positive integer."
+        )
+        raise typer.Exit(code=2)
+
     if css is not None:
         console.print(f"💅 CSS file: [blue]{css}[/blue]")
         css = Path(css)
