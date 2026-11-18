@@ -1,5 +1,5 @@
 # Install uv
-FROM python:3.12-alpine AS base
+FROM python:3.15-alpine AS base
 
 LABEL org.opencontainers.image.authors="Julien Maupetit <julien@maupetit.net>"
 
