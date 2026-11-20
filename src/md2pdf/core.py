@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import List, Optional
 
 import frontmatter
-from jinja2 import Template
+from jinja2.sandbox import SandboxedEnvironment
 from markdown import markdown
 from weasyprint import CSS, HTML
 
@@ -24,6 +24,7 @@ def md2pdf(
     extras: Optional[List[str]] = None,
     extras_config: Optional[dict] = None,
     context: Optional[dict] = None,
+    render_template: bool = False,
 ):
     """Converts input markdown to styled HTML and renders it to a PDF file.
 
@@ -36,6 +37,8 @@ def md2pdf(
         extras: supplementary markdown extensions to activate
         extras_config: a configuration dictionnary for active markdown extensions
         context: input context to use for jinja template rendering
+        render_template: enable Jinja template rendering in a sandboxed
+            environment. Never enable this with untrusted input.
 
     Returns:
         None
@@ -45,6 +48,7 @@ def md2pdf(
     """
     context = context if context else {}
     extras_config = extras_config if extras_config else {}
+    has_context = bool(context)
 
     # Merge base extensions with extras extensions
     extras = extras if extras and len(extras) else []
@@ -68,7 +72,15 @@ def md2pdf(
         context.update(ftmt_context)
 
     # Render the template
-    raw = Template(raw).render(context)
+    if render_template:
+        env = SandboxedEnvironment()
+        raw = env.from_string(raw).render(context)
+    elif has_context:
+        logger.warning(
+            "A context was provided but template rendering is disabled: "
+            "set `render_template=True` (or use the `--template` flag) to "
+            "render it"
+        )
 
     extensions = MARKDOWN_BASE_EXTENSIONS + extras
     raw_html = markdown(raw, extensions=extensions, extension_configs=extras_config)

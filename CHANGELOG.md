@@ -8,6 +8,20 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Security
+
+- Render input markdown as a Jinja template in a sandboxed environment, only
+  when template rendering is explicitly enabled (CWE-1336). Any markdown input
+  used to be rendered as a non-sandboxed Jinja template, allowing
+  server-side template injection leading to arbitrary code execution when
+  converting untrusted documents.
+
+### Changed
+
+- **BREAKING**: Jinja template rendering is now opt-in (disabled by default):
+  use the `render_template=True` argument with the Python API or the `--template`
+  flag with the CLI to enable it
+
 ## [4.0.0] - 2026-11-20
 
 ### Changed

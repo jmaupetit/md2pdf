@@ -55,6 +55,7 @@ def _run_with_progress(
     css: Optional[Path] = None,
     extras: Optional[list[str]] = None,
     extras_config: Optional[dict] = None,
+    template: bool = False,
 ):
     """A wrapper for md2pdf thread execution with task progress update."""
     progress.start_task(task)
@@ -65,6 +66,7 @@ def _run_with_progress(
         base_url=Path.cwd(),
         extras=extras if extras else None,
         extras_config=extras_config,
+        render_template=template,
     )
     progress.update(task, completed=True)
 
@@ -77,6 +79,7 @@ def _start_threads(
     css: Optional[Path] = None,
     extras: Optional[list[str]] = None,
     extras_config: Optional[dict] = None,
+    template: bool = False,
 ):
     """Run convertion in threads with progress."""
     started_at = time()
@@ -97,6 +100,7 @@ def _start_threads(
                     css,
                     extras,
                     extras_config,
+                    template,
                 )
                 tasks.append(task)
 
@@ -163,6 +167,15 @@ def main(
             help="Markdown extensions configuration (as a JSON string).",
         ),
     ] = None,
+    template: Annotated[
+        bool,
+        typer.Option(
+            "--template",
+            "-t",
+            help="Enable Jinja template rendering (sandboxed). "
+            "Never use with untrusted input.",
+        ),
+    ] = False,
     watch: Annotated[
         bool,
         typer.Option(
@@ -200,13 +213,18 @@ def main(
     if extras is not None:
         console.print(f"🔧 Extras: [blue]{extras}[/blue]")
 
+    if template:
+        console.print("⚠️  Template rendering enabled in a sandboxed environment")
+
     extras_config = None
     if config is not None:
         extras_config = parse_config(config)
         console.print(f"🔧 Configuration: [blue]{extras_config}[/blue]")
 
     # Run rendering and exit (if watch is not active)
-    _start_threads(_get_progress(console), workers, md, pdf, css, extras, extras_config)
+    _start_threads(
+        _get_progress(console), workers, md, pdf, css, extras, extras_config, template
+    )
     if not watch:
         raise typer.Exit()
 
@@ -228,7 +246,14 @@ def main(
             changed_md = md
 
         _start_threads(
-            _get_progress(console), workers, changed_md, pdf, css, extras, extras_config
+            _get_progress(console),
+            workers,
+            changed_md,
+            pdf,
+            css,
+            extras,
+            extras_config,
+            template,
         )
 
         watcher_callback()

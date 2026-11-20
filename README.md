@@ -23,24 +23,38 @@ will find installation instructions in the project documentation:
 ### As a CLI
 
 ```
- Usage: md2pdf [OPTIONS]                                                                              
-                                                                                                      
- Markdown to PDF conversion tool with styles… and templates!                                          
-                                                                                                      
-╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────╮
-│ --input               -i      PATH     Markdown source file path (can be used multiple times).     │
-│ --output              -o      PATH     PDF output file path (when a single md input is used).      │
-│ --css                 -c      PATH     Input CSS file.                                             │
-│ --extras              -e      TEXT     Extra markdown extension to activate (cam be used multiple  │
-│                                        times).                                                     │
-│ --config              -C      TEXT     Markdown extensions configuration (as a JSON string).       │
-│ --workers             -W      INTEGER  Number of parallel workers to start. [default: 4]           │
-│ --version             -V               Display program version.                                    │
-│ --install-completion                   Install completion for the current shell.                   │
-│ --show-completion                      Show completion for the current shell, to copy it or        │
-│                                        customize the installation.                                 │
-│ --help                                 Show this message and exit.                                 │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
+ Usage: md2pdf [OPTIONS]                                                        
+                                                                                
+ Markdown to PDF conversion tool with styles… and templates!                    
+                                                                                
+╭─ Options ────────────────────────────────────────────────────────────────────╮
+│ --input               -i      <list[Path]>  Markdown source file path (can   │
+│                                             be used multiple times).         │
+│ --output              -o      <path>        PDF output file path (when a     │
+│                                             single md input is used).        │
+│ --css                 -c      <path>        Input CSS file.                  │
+│ --extras              -e      <list[str]>   Extra markdown extension to      │
+│                                             activate (cam be used multiple   │
+│                                             times).                          │
+│ --config              -C      <str>         Markdown extensions              │
+│                                             configuration (as a JSON         │
+│                                             string).                         │
+│ --template            -t      <bool>        Enable Jinja template rendering  │
+│                                             (sandboxed). Never use with      │
+│                                             untrusted input.                 │
+│ --watch               -w      <bool>        Automatically render PDF upon    │
+│                                             input file(s) changes.           │
+│ --workers             -W      <int>         Number of parallel workers to    │
+│                                             start.                           │
+│                                             [default: 4]                     │
+│ --version             -V      <bool>        Display program version.         │
+│ --install-completion          <bool>        Install completion for the       │
+│                                             current shell.                   │
+│ --show-completion             <bool>        Show completion for the current  │
+│                                             shell, to copy it or customize   │
+│                                             the installation.                │
+│ --help                        <bool>        Show this message and exit.      │
+╰──────────────────────────────────────────────────────────────────────────────╯
 ```
 
 For example, try to generate the project documentation with:
@@ -85,21 +99,26 @@ md2pdf(pdf,
        css=None,
        base_url=None,
        extras=[],
-       context={"foo": 1}
+       context={"foo": 1},
+       render_template=False
 )
 ```
 
 Function arguments:
 
 * `pdf`: output PDF file path
-* `raw`: input markdown raw string content (can contain Jinja instructions)
-* `md`: input markdown file path (can contain Jinja instructions)
+* `raw`: input markdown raw string content (can contain Jinja instructions
+  when `render_template` is enabled)
+* `md`: input markdown file path (can contain Jinja instructions when
+  `render_template` is enabled)
 * `css`: input styles path (CSS)
 * `base_url`: absolute base path for markdown linked content (as images)
 * `extras`: [markdown extra
    extensions](https://python-markdown.github.io/extensions/) that should be
    activated
-* `context`: variables to inject to rendered Jinja template
+* `context`: variables to inject to the rendered Jinja template
+* `render_template`: enable Jinja template rendering (opt-in, sandboxed — see
+  the warning below; never use with untrusted input)
 
 ### With Docker
 
@@ -130,6 +149,13 @@ Your input markdown file or raw content can include
 [Jinja](https://jinja.palletsprojects.com/en/stable/) template tags, and
 context can be given in a frontmatter header:
 
+> [!WARNING]
+> Template rendering is **opt-in** (the `render_template=True` argument or the
+> `--template` flag) and runs in a sandboxed environment. Never enable it with
+> untrusted input (user uploads, user-editable documents, contributed files…):
+> although the sandbox blocks access to Python internals, converting
+> untrusted documents should always be considered risky.
+
 ```md
 ---
 groceries:
@@ -157,6 +183,7 @@ You can test this example using:
 
 ```bash
 $ md2pdf \
+    --template \
     --css examples/gutenberg-modern.min.css \
     -i examples/my-music.md.j2 \
     -o examples/my-music.pdf
