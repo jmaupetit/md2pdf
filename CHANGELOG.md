@@ -12,6 +12,10 @@ and this project adheres to
 
 - Drop support for python 3.10
 
+### Security
+
+- Upgrade `pillow` to 13.0.0
+
 ## [3.1.1] - 2026-03-31 
 
 ### Security
