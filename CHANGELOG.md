@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Removed
+
+- Drop support for python 3.10
+
 ## [3.1.1] - 2026-03-31 
 
 ### Security
