@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+#### Dependencies
+
+- Upgrade `rich` to `15.0`
+- Upgrade `typer` to `0.29.2`
+
 ### Removed
 
 - Drop support for python 3.10
@@ -15,8 +22,12 @@ and this project adheres to
 ### Security
 
 - Upgrade `pillow` to 13.0.0
+- Tighten security floors for runtime dependencies:
+  - `weasyprint` to 70.0
+  - `pymdown-extensions` to 11.0.0
+  - `jinja2` to 3.1.6
 
-## [3.1.1] - 2026-03-31 
+## [3.1.1] - 2026-03-31
 
 ### Security
 
@@ -29,7 +40,7 @@ and this project adheres to
 - CLI: add explicit message to install `cli` extra when trying to run the CLI
   with missing dependencies
 
-### Added 
+### Added
 
 - CLI: add `--watch` option
 
@@ -39,13 +50,13 @@ and this project adheres to
 
 ## [3.0.1] - 2026-01-27
 
-### Fixed 
+### Fixed
 
 - Docker: add missing extra dependencies
 
 ## [3.0.0] - 2026-01-22
 
-### Added 
+### Added
 
 - CLI: allow multiple input markdown files (converted using multiple threads)
 - CLI: add the `--workers` option to adapt parallelisation
@@ -87,7 +98,7 @@ and this project adheres to
 
 ## [1.0.0] - 2023-04-12
 
-### Fixed 
+### Fixed
 
 - Fix installation issue
 
@@ -107,7 +118,7 @@ and this project adheres to
 
 ## [0.5] - 2021-01-21
 
-### Added 
+### Added
 
 - Add markdown table support
 

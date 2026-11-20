@@ -92,7 +92,7 @@ def test_command_version(cli_runner):
 def test_command_raise_error_when_markdown_input_file_does_not_exists(cli_runner):
     """Raise an I/O error when markdown input file does not exist."""
     result = cli_runner.invoke(cli, ["-i", "input.md"])
-    expected = "Invalid value for '--input' / '-i': Path 'input.md' does not exist."
+    expected = "Invalid value for '--input' / '-i': path 'input.md' does not exist."
     assert result.exit_code == 2
     assert expected in result.output
 
@@ -102,7 +102,7 @@ def test_command_raise_error_when_stylesheet_does_not_exists(cli_runner):
     result = cli_runner.invoke(
         cli, ["-c", "styles.css", "-i", str(INPUT_MD), "-o", str(OUTPUT_PDF)]
     )
-    expected = "Invalid value for '--css' / '-c': Path 'styles.css' does not exist."
+    expected = "Invalid value for '--css' / '-c': path 'styles.css' does not exist."
     assert result.exit_code == 2
     assert expected in result.output
 
